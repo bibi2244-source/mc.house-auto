@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC.HOUSE — Быстро. Вкусно. Дерзко.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --red: #e8190e;
+            --red-dark: #b01209;
+            --yellow: #ffc107;
+            --white: #f8f5f0;
+            --gray: #1c1c1c;
+            --muted: #6b6b6b;
+            --border: rgba(255,255,255,0.08);
+            --card: #141414;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        img {
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ── ШАПКА ── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            padding: 0 60px;
+            height: 70px;
+            background: var(--black);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 30px;
+            letter-spacing: 2px;
+            color: var(--white);
+        }
+
+        .logo span { color: var(--red); }
+
+        nav.menu { display: flex; gap: 32px; }
+
+        nav.menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+            font-weight: 500;
+        }
+
+        nav.menu a:hover { opacity: 1; }
+
+        .header-right { display: flex; gap: 14px; align-items: center; }
+
+        #changeColor {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 8px 14px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #changeColor:hover { border-color: var(--red); color: var(--red); }
+
+        /* ── ГЕРОЙ ── */
+        .hero {
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: minmax(0, 620px);
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background:
+                linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(6, 5, 5, 0.96) 28%, rgba(20, 10, 8, 0.92) 55%, rgba(9, 8, 8, 0.99) 100%),
+                radial-gradient(48% 45% at 72% 48%, rgba(255, 96, 30, 0.25), rgba(255, 96, 30, 0.1) 18%, transparent 46%),
+                radial-gradient(32% 24% at 57% 62%, rgba(255, 120, 55, 0.1), transparent 44%),
+                #030303;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: 'MC.HOUSE';
+            position: absolute;
+            left: 50%;
+            top: 51%;
+            color: rgba(255,255,255,0.1);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(170px, 25vw, 760px);
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: -18px;
+            line-height: 0.8;
+            white-space: nowrap;
+            transform: translate(-50%, -50%) rotate(-6deg);
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            opacity: 0.9;
+            text-shadow: 0 0 14px rgba(255, 130, 80, 0.04);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.22) 28%, rgba(0,0,0,0.18) 58%, rgba(0,0,0,0.28) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            font-size: clamp(60px, 8vw, 110px);
+            line-height: 0.92;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .hero-text h1 .red { color: var(--red); }
+
+        .hero-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(232,25,14,0.12), transparent 45%, rgba(0,0,0,0.42));
+            pointer-events: none;
+        }
+        .hero-text h1 .yellow { color: var(--yellow); }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 15px;
+            filter: brightness(0.78) saturate(1.12) contrast(1.05);
+            line-height: 1.7;
+            max-width: 380px;
+            margin-bottom: 36px;
+        }
+
+        .hero-tagline {
+            position: relative;
+            display: block;
+            padding: 18px 0 18px 20px;
+            border-left: 3px solid var(--red);
+            color: var(--white) !important;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 25px !important;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.05 !important;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-tagline::before {
+            content: 'ФИРМЕННЫЙ ВКУС';
+            display: block;
+            margin-bottom: 8px;
+            color: var(--yellow);
+            font-family: 'Barlow', sans-serif;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 500;
+            letter-spacing: 3px;
+        }
+
+        .hero-tagline .highlight {
+            position: relative;
+            display: inline-block;
+            padding: 0 8px !important;
+            background: var(--red) !important;
+            color: var(--white) !important;
+            transform: skew(-8deg);
+        }
+
+        .hero-tagline .highlight::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            left: 8px;
+            height: 2px;
+            background: var(--yellow);
+        }
+
+        .hero-tagline .tagline-description {
+            display: block;
+            max-width: 340px;
+            margin-top: 12px;
+            color: var(--muted);
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 300;
+            letter-spacing: 0;
+            line-height: 1.55;
+            text-transform: none;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--red);
+            color: var(--white);
+            padding: 16px 40px;
+            text-decoration: none;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .hero-cta:hover { background: var(--red-dark); }
+
+        /* ── ПОИСК ── */
+        .search-bar {
+            padding: 32px 60px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-right: none;
+            padding: 14px 20px;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder { color: var(--muted); }
+        .search-bar input:focus { border-color: var(--red); }
+
+        .search-bar button {
+            background: var(--red);
+            border: none;
+            padding: 14px 28px;
+            color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* ── ФИЛЬТРЫ ── */
+        .filters {
+            padding: 24px 60px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 8px 20px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.5;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--red);
+            color: var(--red);
+            opacity: 1;
+        }
+
+        /* ── КАТАЛОГ ── */
+        .section-title {
+            padding: 48px 60px 28px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin: 0 60px 60px;
+        }
+
+        .food-card {
+            background: var(--black);
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .food-card:hover { background: var(--card); }
+
+        .food-cover {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .food-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .food-card:hover .food-cover img { transform: scale(1.06); }
+
+        .food-cover .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--red);
+            color: white;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+        }
+
+        .food-cover .badge.new { background: var(--yellow); color: var(--black); }
+
+        .food-card-body { padding: 16px 20px 20px; }
+
+        .food-card .cat-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .food-card h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+
+        .food-card .weight {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .food-card .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .food-card .price {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .food-card .price .old {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: line-through;
+            margin-left: 6px;
+            font-weight: 400;
+        }
+
+        .choice-btn {
+            background: var(--red);
+            border: none;
+            color: var(--white);
+            padding: 8px 16px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .choice-btn:hover { background: var(--red-dark); }
+
+        .wing-options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .wing-option-label {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .wing-option-select {
+            width: 100%;
+            background: var(--black);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 12px 14px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+        }
+
+        .wing-quantities {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .wing-quantity {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 10px 6px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .wing-quantity.active,
+        .wing-quantity:hover { border-color: var(--red); color: var(--red); }
+
+        .wing-current-price {
+            color: var(--red);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+        }
+
+        .sauce-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .sauce-option {
+            background: var(--black);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Barlow', sans-serif;
+        }
+
+        .sauce-option:hover,
+        .sauce-option.active { border-color: var(--red); }
+
+        .sauce-option img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            background: white;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .sauce-option-name {
+            display: block;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .sauce-option-price {
+            display: block;
+            color: var(--red);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        /* ── ДОМ-СЕКЦИЯ ── */
+        .dom-section {
+            margin: 0 60px 60px;
+            border: 1px solid var(--border);
+            padding: 36px;
+            background: var(--card);
+        }
+
+        .dom-section h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--red);
+        }
+
+        #tovaryList {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        #tovaryList li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        #tovaryTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        #tovaryTable td, #tovaryTable th {
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+        }
+
+        #tovaryTable th {
+            background: rgba(232,25,14,0.1);
+            color: var(--red);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        /* ── КНОПКА МОДАЛ ── */
+        .open-modal-btn {
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+            padding: 12px 28px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 0 60px 60px;
+            display: block;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .open-modal-btn:hover { background: var(--red); color: var(--white); }
+
+        /* ── ПОДВАЛ ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 36px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer .logo-sm {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        footer .logo-sm span { color: var(--red); }
+
+        /* ── МОДАЛ О КОМПАНИИ ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-box {
+            background: var(--gray);
+            border: 1px solid var(--border);
+            padding: 48px;
+            width: min(620px, calc(100% - 40px));
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-box h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .modal-box h3 span { color: var(--red); }
+
+        .modal-box p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .about-intro {
+            color: var(--white) !important;
+            font-size: 16px !important;
+            line-height: 1.5 !important;
+            margin-bottom: 24px;
+        }
+
+        .about-details {
+            display: grid;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 22px;
+        }
+
+        .about-detail {
+            display: grid;
+            gap: 5px;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .about-detail-label {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .about-status {
+            color: #54e879;
+            font-weight: 500;
+        }
+
+        .about-email {
+            background: var(--gray);
+            border: none;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            line-height: 1.45;
+            padding: 0;
+            text-align: left;
+            overflow-wrap: anywhere;
+            cursor: pointer;
+        }
+
+        .about-email:hover { color: var(--white); }
+
+        .about-address {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .about-address:hover { color: var(--yellow); }
+
+        .about-phone {
+            background: var(--gray);
+            border: none;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            line-height: 1.45;
+            padding: 0;
+            text-align: left;
+            overflow-wrap: anywhere;
+            cursor: pointer;
+        }
+
+        .about-phone:hover { color: var(--yellow); }
+
+        .copy-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .about-whatsapp {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .about-whatsapp:hover { color: #54e879; }
+
+        .copy-feedback {
+            color: #54e879;
+            font-size: 12px;
+            min-height: 0;
+            height: auto;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover { color: var(--white); }
+
+        /* ── МОДАЛ ТОВАРА ── */
+        .eda-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .eda-overlay.open { display: flex; }
+
+        .eda-box {
+            background: var(--gray);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            width: 100%;
+            max-width: 860px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .eda-img-wrap { overflow: hidden; }
+
+        .eda-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .eda-info-wrap {
+            padding: 44px 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eda-close {
+            position: absolute;
+            top: 14px; right: 18px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .eda-close:hover { color: var(--white); }
+
+        /* ── АДАПТИВ (ПЛАНШЕТЫ И ТЕЛЕФОНЫ) ── */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                padding: 14px 20px;
+                gap: 12px;
+            }
+
+            .logo { font-size: 24px; }
+
+            nav.menu { gap: 20px; }
+
+            .hero { padding: 50px 20px; }
+
+            .hero::before { display: none; }
+
+            .hero-text h1 { font-size: clamp(42px, 12vw, 70px); }
+
+            .hero-tagline { font-size: 19px !important; padding-left: 14px; }
+
+            .hero-cta { padding: 14px 28px; font-size: 16px; }
+
+            .search-bar { padding: 20px; }
+
+            .filters { padding: 16px 20px; }
+
+            .section-title { padding: 32px 20px 20px; }
+
+            .catalog {
+                grid-template-columns: repeat(2, 1fr);
+                margin: 0 20px 40px;
+            }
+
+            .food-card-body { padding: 12px 14px 16px; }
+
+            .food-card .cat-tag { font-size: 9px; margin-bottom: 4px; }
+
+            .food-card h3 { font-size: 15px; margin-bottom: 3px; }
+
+            .food-card .weight { font-size: 10px; margin-bottom: 8px; }
+
+            .food-card .price-row { flex-wrap: wrap; gap: 8px; }
+
+            .food-card .price { font-size: 18px; }
+
+            .food-card .price .old { font-size: 11px; }
+
+            .choice-btn { padding: 6px 12px; font-size: 13px; }
+
+            .dom-section { margin: 0 20px 40px; padding: 24px; }
+
+            #tovaryTable { display: block; overflow-x: auto; }
+
+            .open-modal-btn { margin: 0 20px 40px; }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 24px 20px;
+            }
+
+            .modal-box { padding: 28px; }
+
+            .eda-overlay { padding: 16px; }
+
+            .eda-box { grid-template-columns: 1fr; }
+
+            .eda-img-wrap { max-height: 240px; }
+
+            .eda-info-wrap { padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .catalog { grid-template-columns: repeat(2, 1fr); margin: 0 12px 32px; }
+
+            .food-card-body { padding: 10px 12px 14px; }
+
+            .food-card h3 { font-size: 13px; }
+
+            .food-card .price { font-size: 16px; }
+
+            .choice-btn { padding: 5px 10px; font-size: 12px; }
+
+            .wing-quantities { grid-template-columns: repeat(2, 1fr); }
+
+            .sauce-options { grid-template-columns: 1fr; }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header>
+    <div class="logo">MC<span>.</span>HOUSE AUTO</div>
+    <nav class="menu">
+        <a href="#catalog" onclick="otkrytVseMenu(event)">Меню</a>
+        <a href="#about" onclick="otkrytModal(); return false;">О нас</a>
+    </nav>
+    <div class="header-right">
+        <button id="changeColor" onclick="menjatFon()">Тема</button>
+    </div>
+</header>
+
+<!-- ГЕРОЙ -->
+<section class="hero">
+    <div class="hero-text">
+        <h1 id="main-header">
+            <span class="red">Горячо.</span><br>
+            <span class="yellow">Быстро.</span><br>
+            Вкусно.
+        </h1>
+        <p class="hero-tagline" style="display: none;">
+            Лучший <span class="highlight">бургер</span> в городе.
+            <span class="tagline-description">Свежие ингредиенты и дерзкий вкус в каждом блюде.</span>
+        </p>
+        <a href="#catalog" class="hero-cta" onclick="otkrytVseMenu(event)">Смотреть меню</a>
+    </div>
+</section>
+
+<!-- ПОИСК -->
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Найти блюдо..." oninput="filtrovatEdu()">
+    <button onclick="filtrovatEdu()">Поиск</button>
+</div>
+
+<!-- ФИЛЬТРЫ -->
+<div class="filters">
+    <button class="filter-btn active" onclick="filtr(this, 'vse')">Всё меню</button>
+    <button class="filter-btn" onclick="filtr(this, 'burgery')">Бургеры</button>
+    <button class="filter-btn" onclick="filtr(this, 'krylyshki')">Крылышки</button>
+    <button class="filter-btn" onclick="filtr(this, 'pitstsa')">Пиццы</button>
+    <button class="filter-btn" onclick="filtr(this, 'rolly')">Роллы</button>
+    <button class="filter-btn" onclick="filtr(this, 'stripsy')">Стрипсы</button>
+    <button class="filter-btn" onclick="filtr(this, 'baytsy')">Байтсы</button>
+    <button class="filter-btn" onclick="filtr(this, 'kartoshka')">Картошка</button>
+    <button class="filter-btn" onclick="filtr(this, 'zakuski')">Закуски</button>
+    <button class="filter-btn" onclick="filtr(this, 'salaty')">Салаты</button>
+    <button class="filter-btn" onclick="filtr(this, 'sousy')">Соусы</button>
+</div>
+
+<!-- МЕНЮ -->
+<div class="section-title" id="catalog">Наше меню</div>
+<div class="catalog" id="catalogGrid"></div>
+
+<!-- ПОПУЛЯРНЫЕ ТОВАРЫ (DOM задание) -->
+<div class="dom-section">
+    <h2>Хиты продаж</h2>
+    <ul id="tovaryList"></ul>
+    <table id="tovaryTable">
+        <thead><tr><th>Блюдо</th><th>Цена</th></tr></thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- КНОПКА МОДАЛ О НАС -->
+<button class="open-modal-btn" onclick="otkrytModal()">О MC.HOUSE</button>
+
+<!-- ПОДВАЛ -->
+<footer>
+    <div class="logo-sm">MC<span>.</span>HOUSE</div>
+    <div>©️ 2025 MC.House. Все права защищены.</div>
+    <div>Меню · О нас</div>
+</footer>
+
+<!-- МОДАЛ О КОМПАНИИ -->
+<div class="modal-overlay" id="modalOverlay" onclick="zakrytModalPoCkliku(event)">
+    <div class="modal-box">
+        <button class="modal-close" onclick="zakrytModal()">✕</button>
+        <h3>О <span>MC.HOUSE</span></h3>
+        <p class="about-intro">Mc.House Авто — точка быстрого питания формата Drive-Thru.</p>
+        <div class="about-details">
+            <div class="about-detail">
+                <span class="about-detail-label">Статус</span>
+                <span class="about-status" id="aboutStatus">Сейчас открыто</span>
+            </div>
+            <div class="about-detail">
+                <span class="about-detail-label">Часы работы</span>
+                <span>11:00 — 23:30</span>
+            </div>
+            <div class="about-detail">
+                <span class="about-detail-label">Адрес</span>
+                <a class="about-address" href="https://yandex.ru/maps/?ll=45.838566%2C43.382607&mode=routes&rtext=~43.382591%2C45.837759&rtt=auto&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D183237515883&z=18.16" target="_blank" rel="noopener noreferrer">Трасса Аргун-Червлённая, ст. Петропавловская, Чеченская Республика, Россия, 366010</a>
+            </div>
+            <div class="about-detail">
+                <span class="about-detail-label">Телефон</span>
+                <div class="copy-line">
+                    <button class="about-phone" type="button" onclick="copyPhone(event)">+7 985 074-91-01</button>
+                    <span class="copy-feedback" id="phoneCopyFeedback" aria-live="polite"></span>
+                </div>
+            </div>
+            <div class="about-detail">
+                <span class="about-detail-label">WhatsApp</span>
+                <a class="about-whatsapp" href="https://wa.me/79850749101" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+            </div>
+            <div class="about-detail">
+                <span class="about-detail-label">Электронная почта</span>
+                <div class="copy-line">
+                    <button class="about-email" type="button" onclick="copyEmail(event)">mchousepetropavlovskaya@gmail.com</button>
+                    <span class="copy-feedback" id="copyFeedback" aria-live="polite"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛ БЛЮДА -->
+<div class="eda-overlay" id="edaOverlay" onclick="zakrytEduPoKliku(event)">
+    <div class="eda-box">
+        <button class="eda-close" onclick="zakrytEdu()">✕</button>
+        <div class="eda-img-wrap">
+            <img id="edaImg" src="" alt="Блюдо">
+        </div>
+        <div class="eda-info-wrap" id="edaInfo"></div>
+    </div>
+</div>
+
+<script>
+    var menu = [
+        { id: 1, title: "Макси Тейсти", cat: "burgery", price: 299 },
+        { id: 2, title: "Мак Люкс", cat: "burgery", price: 259 },
+        { id: 3, title: "Чизбургер x2", cat: "burgery", price: 199 },
+        { id: 4, title: "Чизбургер", cat: "burgery", price: 147 },
+        { id: 5, title: "ВПН Бургер", cat: "burgery", price: 269 },
+        { id: 6, title: "Блэк Бургер", cat: "burgery", price: 289 },
+        { id: 7, title: "Криспи", cat: "burgery", type: "option-group", price: 189, img: "images/криспи.png", options: [
+            { name: "Оригинальный", price: 189, img: "images/криспи.png" },
+            { name: "Острый", price: 189, img: "images/криспи острый.png" }
+        ] },
+        { id: 8, title: "Чикен Барбекю", cat: "burgery", price: 189 },
+        { id: 9, title: "Хот-дог", cat: "burgery", price: 139 },
+        { id: 10, title: "Крылышки", cat: "krylyshki", type: "wing-group", price: 247, img: "images/крылышки.png" },
+        { id: 11, title: "Крылышки в соусе", cat: "krylyshki", type: "wing-group", price: 287, img: "images/крылышки в к-с соусе.png" },
+        { id: 18, title: "Чикен Цезарь", cat: "burgery", price: 159, badge: "Новинка" },
+        { id: 19, title: "Наггер", cat: "burgery", price: 149, badge: "Новинка" },
+        { id: 20, title: "Чикенбургер", cat: "burgery", price: 149, badge: "Новинка" },
+        { id: 21, title: "Пицца Ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
+        { id: 22, title: "Пицца Куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
+        { id: 23, title: "Пицца Мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
+        { id: 24, title: "Пицца Грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
+        { id: 25, title: "Пицца Пепперони", cat: "pitstsa", price: 497, img: "images/пепперони.png" },
+        { id: 26, title: "Пицца Маргарита", cat: "pitstsa", price: 497, img: "images/маргарита.png" },
+        { id: 27, title: "Пицца Цезарь", cat: "pitstsa", price: 497, img: "images/цезарь пицца.png" },
+        { id: 28, title: "Пицца 4 сыра", cat: "pitstsa", price: 497, img: "images/4 сыра.png" },
+        { id: 34, title: "Биг Мастер", cat: "rolly", type: "option-group", price: 249, img: "images/биг мастер.png", options: [
+            { name: "Оригинальный", price: 249, img: "images/биг мастер.png" },
+            { name: "Острый", price: 249, img: "images/биг мастер острый.png" }
+        ] },
+        { id: 35, title: "Лестер", cat: "rolly", type: "option-group", price: 179, img: "images/лестер.png", options: [
+            { name: "Оригинальный", price: 179, img: "images/лестер.png" },
+            { name: "Острый", price: 179, img: "images/лестер острый.png" }
+        ] },
+        { id: 36, title: "Шаурма в кляре", cat: "rolly", price: 277, img: "images/шаурма в кляре.png" },
+        { id: 37, title: "Шримп Ролл", cat: "rolly", price: 239, img: "images/шримп ролл.png" },
+        { id: 38, title: "Биф Ролл", cat: "rolly", price: 199, img: "images/биф ролл.png" },
+        { id: 39, title: "Стрипсы", cat: "stripsy", type: "variant-quantity-group", price: 147, img: "images/стрипсы.png", variants: [
+            { name: "Оригинальные", img: "images/стрипсы.png" },
+            { name: "Острые", img: "images/стрипсы острые.png" }
+        ], quantities: [{ name: "2 шт", price: 147 }, { name: "5 шт", price: 277 }, { name: "7 шт", price: 367 }] },
+        { id: 44, title: "Байтсы Классические", cat: "baytsy", price: 299 },
+        { id: 45, title: "Байтсы в кисло-сладком соусе", cat: "baytsy", price: 327 },
+        { id: 46, title: "Байтсы в остром соусе", cat: "baytsy", price: 327 },
+        { id: 48, title: "Фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png", options: [{ name: "Стандарт", price: 149, img: "images/фри стандарт.png" }, { name: "Большая", price: 189, img: "images/фри большая.png" }] },
+        { id: 49, title: "По-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png", options: [{ name: "Стандарт", price: 159, img: "images/по-деревенски стандарт.png" }, { name: "Большая", price: 219, img: "images/по-деревенски большая.png" }] },
+        { id: 52, title: "Наггетсы", cat: "zakuski", type: "variant-quantity-group", price: 147, img: "images/наггетсы.png", variants: [{ name: "Классические", img: "images/наггетсы.png" }], quantities: [{ name: "5 шт", price: 147 }, { name: "9 шт", price: 227 }, { name: "16 шт", price: 327 }] },
+        { id: 55, title: "Креветки 5 шт", cat: "zakuski", price: 299 },
+        { id: 56, title: "Сырные палочки 6 шт", cat: "zakuski", price: 229 },
+        { id: 57, title: "Соус в ассортименте", cat: "sousy", type: "sauce-group", price: 40, img: "images/109.png", options: [
+            { name: "Сырный соус", price: 40, img: "images/109.png" },
+            { name: "Соус барбекю", price: 40, img: "images/110.png" },
+            { name: "Томатный кетчуп", price: 40, img: "images/111.png" },
+            { name: "Горчичный соус", price: 40, img: "images/112.png" },
+            { name: "Чесночный соус", price: 40, img: "images/113.png" },
+            { name: "Кисло-сладкий соус", price: 40, img: "images/114.png" }
+        ] },
+        { id: 58, title: "Цезарь с курицей", cat: "salaty", price: 197 },
+        { id: 59, title: "Цезарь с креветками", cat: "salaty", price: 269 },
+    ];
+
+    var imageByTitle = {
+        "Макси Тейсти": "images/макси тейсти.png",
+        "Мак Люкс": "images/мак люкс.png",
+        "Чизбургер x2": "images/чизбургер 2х.png",
+        "Чизбургер": "images/чизбургер.png",
+        "ВПН Бургер": "images/ВПН бургер.png",
+        "Блэк Бургер": "images/блэк бургер.png",
+        "Криспи": "images/криспи.png",
+        "Чикен Барбекю": "images/чикен барбекю.png",
+        "Хот-дог": "images/хот-дог.png",
+        "Чикен Цезарь": "images/чикен цезарь.png",
+        "Наггер": "images/наггер.png",
+        "Чикенбургер": "images/чикенбургер.png",
+        "Пицца Ассорти большая": "images/ассорти.png",
+        "Пицца Куриная большая": "images/куриная.png",
+        "Пицца Мясная большая": "images/мясная.png",
+        "Пицца Грибная большая": "images/грибная.png",
+        "Пицца Пепперони большая": "images/пепперони.png",
+        "Пицца Маргарита большая": "images/маргарита.png",
+        "Пицца Цезарь большая": "images/цезарь пицца.png",
+        "Пицца 4 сыра большая": "images/4 сыра.png",
+        "Пицца Ассорти мини": "images/ассорти.png",
+        "Пицца Куриная мини": "images/куриная.png",
+        "Пицца Мясная мини": "images/мясная.png",
+        "Пицца Грибная мини": "images/грибная.png",
+        "Фри стандарт": "images/фри стандарт.png",
+        "Фри большая": "images/фри большая.png",
+        "По-деревенски стандарт": "images/по-деревенски стандарт.png",
+        "По-деревенски большая": "images/по-деревенски большая.png",
+        "Байтсы Классические": "images/байтсы классик.png",
+        "Байтсы в кисло-сладком соусе": "images/байтсы в к-с соусе.png",
+        "Байтсы в остром соусе": "images/байтсы в остром соусе.png",
+        "Стрипсы 7 шт": "images/стрипсы.png",
+        "Стрипсы 5 шт": "images/стрипсы.png",
+        "Стрипсы 2 шт": "images/стрипсы.png",
+        "Наггетсы 5 шт": "images/наггетсы.png",
+        "Наггетсы 9 шт": "images/наггетсы.png",
+        "Наггетсы 16 шт": "images/наггетсы.png",
+        "Креветки 5 шт": "images/креветки.png",
+        "Сырные палочки 6 шт": "images/сырные палочки.png",
+        "Цезарь с курицей": "images/салат цезарь.png",
+        "Цезарь с креветками": "images/салат цезарь с креветками.png"
+    };
+
+    for (var imageIndex = 0; imageIndex < menu.length; imageIndex++) {
+        menu[imageIndex].img = menu[imageIndex].img || imageByTitle[menu[imageIndex].title] || "images/макси тейсти.png";
+        menu[imageIndex].weight = "Порция";
+        menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
+    }
+
+    var tovary = [
+        { name: "Макси Тейсти", price: "299 ₽" },
+        { name: "Крылышки 25 шт", price: "979 ₽" },
+        { name: "Пицца Ассорти средняя", price: "497 ₽" },
+        { name: "Цезарь с креветками", price: "269 ₽" },
+    ];
+
+    var tekushijFiltr = "vse";
+    var fonyStranicy = ["#0a0a0a", "#0a0f0a", "#0f0a0a", "#0a0a0f", "#0f0f0a"];
+    var tekushijFon = 0;
+
+    window.onload = function() {
+        var taskElements = document.querySelectorAll(".task");
+        console.log("Элементы .task:", taskElements);
+
+        var mainHeader = document.getElementById("main-header");
+        console.log("#main-header:", mainHeader);
+
+        var menuLinks = document.querySelectorAll(".menu a");
+        console.log("Ссылки .menu:", menuLinks);
+
+        var noviyAbzac = document.createElement("p");
+        noviyAbzac.innerText = "Новая задача";
+        noviyAbzac.style.display = "none";
+        document.body.appendChild(noviyAbzac);
+
+                         var obsoleteEl = document.querySelector(".obsolete");
+        if (obsoleteEl) {
+            obsoleteEl.parentNode.removeChild(obsoleteEl);
+        }
+
+        var highlightEl = document.querySelector(".highlight");
+        if (highlightEl) {
+            highlightEl.style.fontWeight = "500";
+        }
+
+        var ul = document.getElementById("tovaryList");
+        for (var i = 0; i < tovary.length; i++) {
+            var li = document.createElement("li");
+            li.innerText = tovary[i].name + " — " + tovary[i].price;
+            ul.appendChild(li);
+        }
+
+        var tbody = document.querySelector("#tovaryTable tbody");
+        for (var i = 0; i < 3; i++) {
+            var tr = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            td1.innerText = tovary[i].name;
+            td2.innerText = tovary[i].price;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tbody.appendChild(tr);
+        }
+
+        renderKatalog(menu);
+        updateAboutStatus();
+        setInterval(updateAboutStatus, 60000);
+    };
+
+    function menjatFon() {
+        tekushijFon = tekushijFon + 1;
+        if (tekushijFon >= fonyStranicy.length) {
+            tekushijFon = 0;
+        }
+        document.body.style.backgroundColor = fonyStranicy[tekushijFon];
+    }
+
+    function updateAboutStatus() {
+        var now = new Date();
+        var minutes = now.getHours() * 60 + now.getMinutes();
+        var isOpen = minutes >= 11 * 60 && minutes <= 23 * 60 + 30;
+        var status = document.getElementById("aboutStatus");
+
+        if (!status) return;
+        status.innerText = isOpen ? "Сейчас открыто" : "Сейчас закрыто";
+        status.style.color = isOpen ? "#54e879" : "#e08080";
+    }
+
+    function otkrytModal() {
+        document.getElementById("modalOverlay").classList.add("open");
+    }
+
+    function zakrytModal() {
+        document.getElementById("modalOverlay").classList.remove("open");
+    }
+
+    function zakrytModalPoCkliku(e) {
+        if (e.target == document.getElementById("modalOverlay")) {
+            zakrytModal();
+        }
+    }
+
+    function copyEmail(e) {
+        e.preventDefault();
+        var email = "mchousepetropavlovskaya@gmail.com";
+        var feedback = document.getElementById("copyFeedback");
+
+        function showCopyFeedback() {
+            feedback.innerText = "Скопировано";
+            setTimeout(function() { feedback.innerText = ""; }, 1800);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(email).then(showCopyFeedback);
+            return;
+        }
+
+        var helper = document.createElement("textarea");
+        helper.value = email;
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
+        document.execCommand("copy");
+        document.body.removeChild(helper);
+        showCopyFeedback();
+    }
+
+    function copyPhone(e) {
+        e.preventDefault();
+        var phone = "+7 985 074-91-01";
+        var feedback = document.getElementById("phoneCopyFeedback");
+
+        function showCopyFeedback() {
+            feedback.innerText = "Скопировано";
+            setTimeout(function() { feedback.innerText = ""; }, 1800);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(phone).then(showCopyFeedback);
+            return;
+        }
+
+        var helper = document.createElement("textarea");
+        helper.value = phone;
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
+        document.execCommand("copy");
+        document.body.removeChild(helper);
+        showCopyFeedback();
+    }
+
+    function catLabel(c) {
+        var metki = {
+            burgery: "Бургеры",
+            krylyshki: "Крылышки",
+            pitstsa: "Пиццы",
+            rolly: "Роллы",
+            stripsy: "Стрипсы",
+            baytsy: "Байтсы",
+            kartoshka: "Картошка",
+            zakuski: "Закуски",
+            salaty: "Салаты",
+            sousy: "Соусы"
+        };
+        return metki[c] || c;
+    }
+
+    function renderKatalog(massiv) {
+        var catalog = document.getElementById("catalogGrid");
+        catalog.innerHTML = "";
+        if (massiv.length == 0) {
+            catalog.innerHTML = '<div style="padding:60px;color:var(--muted);font-size:14px;grid-column:span 4;text-align:center;">Ничего не найдено</div>';
+            return;
+        }
+        for (var i = 0; i < massiv.length; i++) {
+            var k = massiv[i];
+            var badgeClass = k.badge == "Новинка" ? "badge new" : "badge";
+            var badgeHtml = k.badge ? '<div class="' + badgeClass + '">' + k.badge + '</div>' : '';
+            var oldPriceHtml = k.oldPrice ? '<span class="old">' + k.oldPrice + ' ₽</span>' : '';
+            var cardActionHtml = k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? '<button class="choice-btn" onclick="otkrytBlyudo(' + k.id + ')">Выбрать</button>' : '';
+            var card = document.createElement("div");
+            card.className = "food-card task";
+            card.setAttribute("data-cat", k.cat);
+            card.innerHTML =
+                '<div class="food-cover" onclick="otkrytBlyudo(' + k.id + ')">' +
+                    '<img src="' + k.img + '" alt="' + k.title + '" onerror="this.style.opacity=\'0\'">' +
+                    badgeHtml +
+                '</div>' +
+                '<div class="food-card-body">' +
+                    '<div class="cat-tag">' + catLabel(k.cat) + '</div>' +
+                    '<h3 onclick="otkrytBlyudo(' + k.id + ')" style="cursor:pointer">' + k.title + '</h3>' +
+                    '<div class="weight">' + k.weight + '</div>' +
+                    '<div class="price-row">' +
+                        '<div class="price">' + (k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
+                        cardActionHtml +
+                    '</div>' +
+                '</div>';
+            catalog.appendChild(card);
+        }
+    }
+
+    function otkrytBlyudo(id) {
+        var blyudo = null;
+        for (var i = 0; i < menu.length; i++) {
+            if (menu[i].id == id) {
+                blyudo = menu[i];
+                break;
+            }
+        }
+        if (!blyudo) return;
+
+        if (blyudo.type == "wing-group") {
+            renderWingModal(blyudo);
+            document.getElementById("edaOverlay").classList.add("open");
+            return;
+        }
+
+        if (blyudo.type == "option-group") {
+            renderOptionModal(blyudo);
+            document.getElementById("edaOverlay").classList.add("open");
+            return;
+        }
+
+        if (blyudo.type == "variant-quantity-group") {
+            renderVariantQuantityModal(blyudo);
+            document.getElementById("edaOverlay").classList.add("open");
+            return;
+        }
+
+        if (blyudo.type == "sauce-group") {
+            renderSauceModal(blyudo);
+            document.getElementById("edaOverlay").classList.add("open");
+            return;
+        }
+
+        var oldPriceHtml = blyudo.oldPrice ? '<span style="font-size:16px;color:var(--muted);text-decoration:line-through;margin-left:10px;">' + blyudo.oldPrice + ' ₽</span>' : '';
+        var badgeHtml = blyudo.badge ? '<span style="background:var(--red);color:white;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px;display:inline-block;">' + blyudo.badge + '</span><br>' : '';
+
+        document.getElementById("edaImg").src = blyudo.img;
+        document.getElementById("edaInfo").innerHTML =
+            badgeHtml +
+            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(blyudo.cat) + '</div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + blyudo.title + '</h2>' +
+            '<div style="font-size:12px;color:var(--muted);margin-bottom:20px;">' + blyudo.weight + '</div>' +
+            '<div style="font-size:14px;color:var(--white);line-height:1.8;margin-bottom:28px;opacity:0.8;">' + blyudo.desc + '</div>' +
+            '<div style="display:flex;align-items:center;gap:10px;">' +
+                '<span style="font-family:Barlow Condensed,sans-serif;font-size:40px;font-weight:900;">' + blyudo.price + ' ₽</span>' +
+                oldPriceHtml +
+            '</div>';
+
+        document.getElementById("edaOverlay").classList.add("open");
+    }
+
+    var activeWingProduct = null;
+    var activeWingVariant = 0;
+    var activeWingQuantity = 5;
+
+    function getWingVariants(product) {
+        if (product.id == 10) {
+            return [
+                { name: "Оригинальные", img: "images/крылышки.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 } },
+                { name: "Острые", img: "images/крылышки острые.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 } }
+            ];
+        }
+        return [
+            { name: "Кисло-сладкий соус", img: "images/крылышки в к-с соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 } },
+            { name: "Острый соус", img: "images/крылышки в остром соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 } }
+        ];
+    }
+
+    function renderWingModal(product) {
+        activeWingProduct = product;
+        activeWingVariant = 0;
+        activeWingQuantity = 5;
+        var variants = getWingVariants(product);
+        var optionsHtml = "";
+        for (var i = 0; i < variants.length; i++) {
+            optionsHtml += '<option value="' + i + '">' + variants[i].name + '</option>';
+        }
+
+        document.getElementById("edaImg").src = variants[0].img;
+        document.getElementById("edaInfo").innerHTML =
+            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">Крылышки</div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
+            '<div class="wing-options">' +
+                '<div><label class="wing-option-label" for="wingVariant">Вариант</label><select class="wing-option-select" id="wingVariant" onchange="chooseWingVariant(this.value)">' + optionsHtml + '</select></div>' +
+                '<div><span class="wing-option-label">Количество</span><div class="wing-quantities">' +
+                    '<button class="wing-quantity active" onclick="chooseWingQuantity(5)">5 шт</button>' +
+                    '<button class="wing-quantity" onclick="chooseWingQuantity(8)">8 шт</button>' +
+                    '<button class="wing-quantity" onclick="chooseWingQuantity(16)">16 шт</button>' +
+                    '<button class="wing-quantity" onclick="chooseWingQuantity(25)">25 шт</button>' +
+                '</div></div>' +
+                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="wingCurrentPrice">' + variants[0].prices[5] + ' ₽</div></div>' +
+            '</div>';
+    }
+
+    function chooseWingVariant(value) {
+        activeWingVariant = Number(value);
+        var variant = getWingVariants(activeWingProduct)[activeWingVariant];
+        document.getElementById("edaImg").src = variant.img;
+        updateWingPrice();
+    }
+
+    function chooseWingQuantity(quantity) {
+        activeWingQuantity = quantity;
+        var buttons = document.querySelectorAll(".wing-quantity");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.toggle("active", buttons[i].innerText.indexOf(quantity + " ") == 0);
+        }
+        updateWingPrice();
+    }
+
+    function updateWingPrice() {
+        var variant = getWingVariants(activeWingProduct)[activeWingVariant];
+        document.getElementById("wingCurrentPrice").innerText = variant.prices[activeWingQuantity] + " ₽";
+    }
+
+    var activeOptionProduct = null;
+    var activeOptionIndex = 0;
+
+    function renderOptionModal(product) {
+        activeOptionProduct = product;
+        activeOptionIndex = 0;
+        var optionsHtml = "";
+        for (var i = 0; i < product.options.length; i++) {
+            optionsHtml += '<option value="' + i + '">' + product.options[i].name + '</option>';
+        }
+
+        document.getElementById("edaImg").src = product.options[0].img || product.img;
+        document.getElementById("edaInfo").innerHTML =
+            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(product.cat) + '</div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
+            '<div class="wing-options">' +
+                '<div><label class="wing-option-label" for="productOption">Вариант</label><select class="wing-option-select" id="productOption" onchange="chooseProductOption(this.value)">' + optionsHtml + '</select></div>' +
+                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="productCurrentPrice">' + product.options[0].price + ' ₽</div></div>' +
+            '</div>';
+    }
+
+    function chooseProductOption(value) {
+        activeOptionIndex = Number(value);
+        var option = activeOptionProduct.options[activeOptionIndex];
+        document.getElementById("edaImg").src = option.img || activeOptionProduct.img;
+        document.getElementById("productCurrentPrice").innerText = option.price + " ₽";
+    }
+
+    var activeVariantQuantityProduct = null;
+    var activeVariantIndex = 0;
+    var activeQuantityIndex = 0;
+
+    function renderVariantQuantityModal(product) {
+        activeVariantQuantityProduct = product;
+        activeVariantIndex = 0;
+        activeQuantityIndex = 0;
+        var variantHtml = "";
+        var quantityHtml = "";
+        var showVariantSelector = product.variants && product.variants.length > 1;
+
+        for (var i = 0; i < product.variants.length; i++) {
+            variantHtml += '<option value="' + i + '">' + product.variants[i].name + '</option>';
+        }
+        for (var j = 0; j < product.quantities.length; j++) {
+            quantityHtml += '<button class="wing-quantity' + (j == 0 ? ' active' : '') + '" type="button" onclick="chooseVariantQuantityAmount(' + j + ')">' + product.quantities[j].name + '</button>';
+        }
+
+        document.getElementById("edaImg").src = product.variants[0].img;
+        document.getElementById("edaInfo").innerHTML =
+            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(product.cat) + '</div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
+            '<div class="wing-options">' +
+                (showVariantSelector ? '<div><label class="wing-option-label" for="stripVariant">Вариант</label><select class="wing-option-select" id="stripVariant" onchange="chooseVariantQuantityVariant(this.value)">' + variantHtml + '</select></div>' : '') +
+                '<div><span class="wing-option-label">Количество</span><div class="wing-quantities">' + quantityHtml + '</div></div>' +
+                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="variantQuantityPrice">' + product.quantities[0].price + ' ₽</div></div>' +
+            '</div>';
+    }
+
+    function chooseVariantQuantityVariant(value) {
+        activeVariantIndex = Number(value);
+        var product = activeVariantQuantityProduct;
+        document.getElementById("edaImg").src = product.variants[activeVariantIndex].img;
+    }
+
+    function chooseVariantQuantityAmount(value) {
+        activeQuantityIndex = Number(value);
+        var price = activeVariantQuantityProduct.quantities[activeQuantityIndex].price;
+        document.getElementById("variantQuantityPrice").innerText = price + " ₽";
+        var buttons = document.querySelectorAll(".wing-quantities .wing-quantity");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.toggle("active", i == activeQuantityIndex);
+        }
+    }
+
+    var activeSauceProduct = null;
+
+    function renderSauceModal(product) {
+        activeSauceProduct = product;
+        var optionsHtml = "";
+        for (var i = 0; i < product.options.length; i++) {
+            optionsHtml += '<button class="sauce-option' + (i == 0 ? ' active' : '') + '" onclick="chooseSauce(' + i + ')">' +
+                '<img src="' + product.options[i].img + '" alt="' + product.options[i].name + '">' +
+                '<span class="sauce-option-name">' + product.options[i].name + '</span>' +
+                '<span class="sauce-option-price">' + product.options[i].price + ' ₽</span>' +
+            '</button>';
+        }
+
+        document.getElementById("edaImg").src = product.options[0].img;
+        document.getElementById("edaInfo").innerHTML =
+            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">Соусы</div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">Соус в ассортименте</h2>' +
+            '<div class="wing-options">' +
+                '<div><span class="wing-option-label">Выберите соус</span><div class="sauce-options">' + optionsHtml + '</div></div>' +
+                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="sauceCurrentPrice">40 ₽</div></div>' +
+            '</div>';
+    }
+
+    function chooseSauce(index) {
+        var option = activeSauceProduct.options[index];
+        document.getElementById("edaImg").src = option.img;
+        document.getElementById("sauceCurrentPrice").innerText = option.price + " ₽";
+        var buttons = document.querySelectorAll(".sauce-option");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.toggle("active", i == index);
+        }
+    }
+
+    function zakrytEdu() {
+        document.getElementById("edaOverlay").classList.remove("open");
+    }
+
+    function zakrytEduPoKliku(e) {
+        if (e.target == document.getElementById("edaOverlay")) {
+            zakrytEdu();
+        }
+    }
+
+    function otkrytVseMenu(e) {
+        e.preventDefault();
+        tekushijFiltr = "vse";
+        document.getElementById("searchInput").value = "";
+
+        var btns = document.querySelectorAll(".filter-btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.toggle("active", i == 0);
+        }
+
+        filtrovatEdu();
+        document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function filtr(btn, cat) {
+        tekushijFiltr = cat;
+        var btns = document.querySelectorAll(".filter-btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+        btn.classList.add("active");
+        filtrovatEdu();
+    }
+
+    function filtrovatEdu() {
+        var query = document.getElementById("searchInput").value.toLowerCase();
+        var result = [];
+        for (var i = 0; i < menu.length; i++) {
+            var k = menu[i];
+            var podhoditPoCat = tekushijFiltr == "vse" || k.cat == tekushijFiltr;
+            var podhoditPoPoisku = k.title.toLowerCase().indexOf(query) != -1;
+            if (podhoditPoCat && podhoditPoPoisku) {
+                result.push(k);
+            }
+        }
+        renderKatalog(result);
+    }
+
+</script>
+</body>
+</html>
