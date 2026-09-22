@@ -7,15 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --black: #0a0a0a;
-            --red: #e8190e;
-            --red-dark: #b01209;
+            --black: #f5f4f1;
+            --red: #ff1e1e;
+            --red-dark: #d61414;
             --yellow: #ffc107;
-            --white: #f8f5f0;
-            --gray: #1c1c1c;
+            --white: #171512;
+            --gray: #ffffff;
             --muted: #6b6b6b;
-            --border: rgba(255,255,255,0.08);
-            --card: #141414;
+            --border: rgba(0,0,0,0.08);
+            --card: #ffffff;
+            --on-accent: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -66,7 +67,7 @@
             font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.5;
+            opacity: 1;
             transition: opacity 0.2s;
             font-weight: 500;
         }
@@ -78,7 +79,7 @@
         #changeColor {
             background: transparent;
             border: 1px solid var(--border);
-            color: var(--muted);
+            color: var(--white);
             padding: 8px 14px;
             font-family: 'Barlow', sans-serif;
             font-size: 11px;
@@ -86,6 +87,7 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
+            border-radius: 20px;
         }
 
         #changeColor:hover { border-color: var(--red); color: var(--red); }
@@ -94,14 +96,13 @@
         .hero {
             padding: 80px 60px;
             display: grid;
-            grid-template-columns: minmax(0, 620px);
+            grid-template-columns: minmax(0, 560px) minmax(260px, 460px);
             align-items: center;
+            gap: 40px;
             border-bottom: 1px solid var(--border);
             background:
-                linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(6, 5, 5, 0.96) 28%, rgba(20, 10, 8, 0.92) 55%, rgba(9, 8, 8, 0.99) 100%),
-                radial-gradient(48% 45% at 72% 48%, rgba(255, 96, 30, 0.25), rgba(255, 96, 30, 0.1) 18%, transparent 46%),
-                radial-gradient(32% 24% at 57% 62%, rgba(255, 120, 55, 0.1), transparent 44%),
-                #030303;
+                radial-gradient(48% 45% at 78% 48%, rgba(232, 25, 14, 0.09), rgba(255, 193, 7, 0.06) 30%, transparent 55%),
+                var(--black);
             position: relative;
             overflow: hidden;
         }
@@ -111,7 +112,7 @@
             position: absolute;
             left: 50%;
             top: 51%;
-            color: rgba(255,255,255,0.1);
+            color: rgba(10,10,10,0.05);
             font-family: 'Barlow Condensed', sans-serif;
             font-size: clamp(170px, 25vw, 760px);
             font-style: italic;
@@ -124,14 +125,14 @@
             user-select: none;
             z-index: 0;
             opacity: 0.9;
-            text-shadow: 0 0 14px rgba(255, 130, 80, 0.04);
+            text-shadow: none;
         }
 
         .hero::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.22) 28%, rgba(0,0,0,0.18) 58%, rgba(0,0,0,0.28) 100%);
+            background: linear-gradient(90deg, rgba(245,244,241,0.9) 0%, rgba(245,244,241,0.35) 35%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -234,7 +235,7 @@
         .hero-cta {
             display: inline-block;
             background: var(--red);
-            color: var(--white);
+            color: var(--on-accent);
             padding: 16px 40px;
             text-decoration: none;
             font-family: 'Barlow Condensed', sans-serif;
@@ -243,9 +244,25 @@
             text-transform: uppercase;
             font-weight: 700;
             transition: background 0.2s;
+            border-radius: 50px;
         }
 
         .hero-cta:hover { background: var(--red-dark); }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            background: var(--black);
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 460px;
+            height: auto;
+            mix-blend-mode: multiply;
+        }
 
         /* ── ПОИСК ── */
         .search-bar {
@@ -264,6 +281,7 @@
             font-family: 'Barlow', sans-serif;
             font-size: 14px;
             outline: none;
+            border-radius: 50px 0 0 50px;
         }
 
         .search-bar input::placeholder { color: var(--muted); }
@@ -273,13 +291,14 @@
             background: var(--red);
             border: none;
             padding: 14px 28px;
-            color: var(--white);
+            color: var(--on-accent);
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 16px;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
             font-weight: 700;
+            border-radius: 0 50px 50px 0;
         }
 
         /* ── ФИЛЬТРЫ ── */
@@ -302,8 +321,9 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
-            opacity: 0.5;
+            opacity: 1;
             font-weight: 500;
+            border-radius: 20px;
         }
 
         .filter-btn:hover,
@@ -336,20 +356,22 @@
         .catalog {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: var(--border);
+            gap: 20px;
+            background: transparent;
             margin: 0 60px 60px;
         }
 
         .food-card {
-            background: var(--black);
-            padding: 0;
+            background: var(--card);
+            padding: 10px 10px 0;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: box-shadow 0.2s, transform 0.2s;
             position: relative;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
-        .food-card:hover { background: var(--card); }
+        .food-card:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.1); transform: translateY(-2px); }
 
         .food-cover {
             width: 100%;
@@ -357,6 +379,7 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border-radius: 16px;
         }
 
         .food-cover img {
@@ -380,11 +403,12 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 3px 8px;
+            border-radius: 6px;
         }
 
-        .food-cover .badge.new { background: var(--yellow); color: var(--black); }
+        .food-cover .badge.new { background: var(--yellow); color: #171512; }
 
-        .food-card-body { padding: 16px 20px 20px; }
+        .food-card-body { padding: 14px 6px 18px; }
 
         .food-card .cat-tag {
             font-size: 10px;
@@ -435,13 +459,14 @@
         .choice-btn {
             background: var(--red);
             border: none;
-            color: var(--white);
+            color: var(--on-accent);
             padding: 8px 16px;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             letter-spacing: 1px;
+            border-radius: 20px;
         }
 
         .choice-btn:hover { background: var(--red-dark); }
@@ -469,6 +494,7 @@
             padding: 12px 14px;
             font-family: 'Barlow', sans-serif;
             font-size: 14px;
+            border-radius: 10px;
         }
 
         .wing-quantities {
@@ -485,6 +511,7 @@
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 16px;
             cursor: pointer;
+            border-radius: 10px;
         }
 
         .wing-quantity.active,
@@ -511,6 +538,7 @@
             text-align: left;
             cursor: pointer;
             font-family: 'Barlow', sans-serif;
+            border-radius: 12px;
         }
 
         .sauce-option:hover,
@@ -523,6 +551,7 @@
             background: white;
             display: block;
             margin-bottom: 7px;
+            border-radius: 8px;
         }
 
         .sauce-option-name {
@@ -603,9 +632,10 @@
             display: block;
             font-weight: 700;
             transition: all 0.2s;
+            border-radius: 30px;
         }
 
-        .open-modal-btn:hover { background: var(--red); color: var(--white); }
+        .open-modal-btn:hover { background: var(--red); color: var(--on-accent); }
 
         /* ── ПОДВАЛ ── */
         footer {
@@ -842,9 +872,13 @@
 
             nav.menu { gap: 20px; }
 
-            .hero { padding: 50px 20px; }
+            .hero { padding: 50px 20px; grid-template-columns: 1fr; gap: 24px; }
 
             .hero::before { display: none; }
+
+            .hero-image { order: -1; }
+
+            .hero-image img { max-width: 280px; }
 
             .hero-text h1 { font-size: clamp(42px, 12vw, 70px); }
 
@@ -860,6 +894,7 @@
 
             .catalog {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
                 margin: 0 20px 40px;
             }
 
@@ -904,7 +939,7 @@
         }
 
         @media (max-width: 480px) {
-            .catalog { grid-template-columns: repeat(2, 1fr); margin: 0 12px 32px; }
+            .catalog { grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 0 12px 32px; }
 
             .food-card-body { padding: 10px 12px 14px; }
 
@@ -931,9 +966,7 @@
         <a href="#catalog" onclick="otkrytVseMenu(event)">Меню</a>
         <a href="#about" onclick="otkrytModal(); return false;">О нас</a>
     </nav>
-    <div class="header-right">
-        <button id="changeColor" onclick="menjatFon()">Тема</button>
-    </div>
+    <div class="header-right"></div>
 </header>
 
 <!-- ГЕРОЙ -->
@@ -949,6 +982,9 @@
             <span class="tagline-description">Свежие ингредиенты и дерзкий вкус в каждом блюде.</span>
         </p>
         <a href="#catalog" class="hero-cta" onclick="otkrytVseMenu(event)">Смотреть меню</a>
+    </div>
+    <div class="hero-image">
+        <img src="images/combo.png.png" alt="Комбо MC.HOUSE">
     </div>
 </section>
 
@@ -1169,7 +1205,7 @@
     ];
 
     var tekushijFiltr = "vse";
-    var fonyStranicy = ["#0a0a0a", "#0a0f0a", "#0f0a0a", "#0a0a0f", "#0f0f0a"];
+    var fonyStranicy = ["#f5f4f1", "#f2f6f4", "#f6f2f2", "#f2f2f6", "#f4f6f2"];
     var tekushijFon = 0;
 
     window.onload = function() {
