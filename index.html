@@ -76,6 +76,30 @@
 
         .header-right { display: flex; gap: 14px; align-items: center; }
 
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .location-icon {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--red);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
         #changeColor {
             background: transparent;
             border: 1px solid var(--border);
@@ -862,6 +886,14 @@
         /* ── АДАПТИВ (ПЛАНШЕТЫ И ТЕЛЕФОНЫ) ── */
         @media (max-width: 768px) {
             header {
+                .location {
+                    font-size: 10px;
+                    letter-spacing: 0.8px;
+                }
+                .location-icon {
+                    width: 16px;
+                    height: 16px;
+                }
                 flex-direction: column;
                 height: auto;
                 padding: 14px 20px;
@@ -966,7 +998,15 @@
         <a href="#catalog" onclick="otkrytVseMenu(event)">Меню</a>
         <a href="#about" onclick="otkrytModal(); return false;">О нас</a>
     </nav>
-    <div class="header-right"></div>
+    <div class="header-right">
+    <div class="location">
+        <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path>
+            <circle cx="12" cy="9" r="2.5"></circle>
+        </svg>
+        <span>Петропавловская</span>
+    </div>
+</div>
 </header>
 
 <!-- ГЕРОЙ -->
