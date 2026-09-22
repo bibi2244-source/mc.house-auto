@@ -59,20 +59,57 @@
 
         .logo span { color: var(--red); }
 
-        nav.menu { display: flex; gap: 32px; }
-
-        nav.menu a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 1;
-            transition: opacity 0.2s;
-            font-weight: 500;
+        nav.menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
+    nav.menu a,
+    nav.menu span {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 1;
+        transition: opacity 0.2s;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    nav.menu a:hover {
+        opacity: 0.7;
+    }
+
         nav.menu a:hover { opacity: 1; }
+        
+        nav.menu .order-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--red);
+            color: #ffffff;
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            opacity: 1;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        nav.menu .order-btn:hover {
+            background: var(--red-dark);
+            color: #ffffff;
+            opacity: 1;
+            transform: translateY(-1px);
+        }
 
         .header-right { display: flex; gap: 14px; align-items: center; }
 
@@ -120,7 +157,7 @@
         .hero {
             padding: 80px 60px;
             display: grid;
-            grid-template-columns: minmax(0, 560px) minmax(260px, 460px);
+            grid-template-columns: minmax(0, 560px) minmax(360px, 620px);
             align-items: center;
             gap: 40px;
             border-bottom: 1px solid var(--border);
@@ -132,24 +169,7 @@
         }
 
         .hero::before {
-            content: 'MC.HOUSE';
-            position: absolute;
-            left: 50%;
-            top: 51%;
-            color: rgba(10,10,10,0.05);
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(170px, 25vw, 760px);
-            font-style: italic;
-            font-weight: 900;
-            letter-spacing: -18px;
-            line-height: 0.8;
-            white-space: nowrap;
-            transform: translate(-50%, -50%) rotate(-6deg);
-            pointer-events: none;
-            user-select: none;
-            z-index: 0;
-            opacity: 0.9;
-            text-shadow: none;
+            display: none;
         }
 
         .hero::after {
@@ -283,7 +303,7 @@
 
         .hero-image img {
             width: 100%;
-            max-width: 460px;
+            max-width: 620px;
             height: auto;
             mix-blend-mode: multiply;
         }
@@ -902,7 +922,17 @@
 
             .logo { font-size: 24px; }
 
-            nav.menu { gap: 20px; }
+            nav.menu { 
+                gap: 14px;
+                justify-content: center;
+                width: 100%; 
+            }
+
+            nav.menu .order-btn {
+                padding: 7px 14px;
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
 
             .hero { padding: 50px 20px; grid-template-columns: 1fr; gap: 24px; }
 
@@ -910,7 +940,9 @@
 
             .hero-image { order: -1; }
 
-            .hero-image img { max-width: 280px; }
+            .hero-image img { 
+                width: 100%;
+                max-width: 360px; }
 
             .hero-text h1 { font-size: clamp(42px, 12vw, 70px); }
 
@@ -971,6 +1003,13 @@
         }
 
         @media (max-width: 480px) {
+
+            nav.menu .order-btn {
+                padding: 6px 11px;
+                font-size: 10px;
+                letter-spacing: 0.7px;
+            }
+
             .catalog { grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 0 12px 32px; }
 
             .food-card-body { padding: 10px 12px 14px; }
@@ -995,8 +1034,12 @@
 <header>
     <div class="logo">MC<span>.</span>HOUSE AUTO</div>
     <nav class="menu">
+        <a href="#top">Главная</a>
         <a href="#catalog" onclick="otkrytVseMenu(event)">Меню</a>
         <a href="#about" onclick="otkrytModal(); return false;">О нас</a>
+        <span>Адрес</span>
+        <span>Контакты</span>
+        <a href="https://wa.me/79850749101" class="order-btn" target="_blank" rel="noopener noreferrer">Заказать</a>
     </nav>
     <div class="header-right">
     <div class="location">
