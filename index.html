@@ -1267,7 +1267,7 @@
     var menu = [
         { id: 1, title: "Макси Тейсти", cat: "burgery", price: 299 },
         { id: 2, title: "Мак Люкс", cat: "burgery", price: 259 },
-        { id: 3, title: "Чизбургер x2", cat: "burgery", price: 199 },
+        { id: 3, title: "Двойной Чизбургер", cat: "burgery", price: 199 },
         { id: 4, title: "Чизбургер", cat: "burgery", price: 147 },
         { id: 5, title: "ВПН Бургер", cat: "burgery", price: 269 },
         { id: 6, title: "Блэк Бургер", cat: "burgery", price: 289 },
@@ -1298,21 +1298,52 @@
             { name: "Оригинальный", price: 179, img: "images/лестер.png" },
             { name: "Острый", price: 179, img: "images/лестер острый.png" }
         ] },
-        { id: 36, title: "Шаурма в кляре", cat: "rolly", price: 277, img: "images/шаурма в кляре.png" },
         { id: 37, title: "Шримп Ролл", cat: "rolly", price: 239, img: "images/шримп ролл.png" },
         { id: 38, title: "Биф Ролл", cat: "rolly", price: 199, img: "images/биф ролл.png" },
+        { id: 48, title: "Картофель Фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png", options: [
+            { name: "Стандарт", price: 149, img: "images/фри стандарт.png" },
+            { name: "Большая", price: 189, img: "images/фри большая.png" }
+        ] },
+        { id: 49, title: "Картофель по-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png", options: [
+            { name: "Стандарт", price: 159, img: "images/по-деревенски стандарт.png" },
+            { name: "Большая", price: 219, img: "images/по-деревенски большая.png" }
+        ] },
         { id: 39, title: "Стрипсы", cat: "stripsy", type: "variant-quantity-group", price: 147, img: "images/стрипсы.png", variants: [
             { name: "Оригинальные", img: "images/стрипсы.png" },
             { name: "Острые", img: "images/стрипсы острые.png" }
-        ], quantities: [{ name: "2 шт", price: 147 }, { name: "5 шт", price: 277 }, { name: "7 шт", price: 367 }] },
-        { id: 44, title: "Байтсы Классические", cat: "baytsy", price: 299 },
-        { id: 45, title: "Байтсы в кисло-сладком соусе", cat: "baytsy", price: 327 },
-        { id: 46, title: "Байтсы в остром соусе", cat: "baytsy", price: 327 },
-        { id: 48, title: "Фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png", options: [{ name: "Стандарт", price: 149, img: "images/фри стандарт.png" }, { name: "Большая", price: 189, img: "images/фри большая.png" }] },
-        { id: 49, title: "По-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png", options: [{ name: "Стандарт", price: 159, img: "images/по-деревенски стандарт.png" }, { name: "Большая", price: 219, img: "images/по-деревенски большая.png" }] },
-        { id: 52, title: "Наггетсы", cat: "zakuski", type: "variant-quantity-group", price: 147, img: "images/наггетсы.png", variants: [{ name: "Классические", img: "images/наггетсы.png" }], quantities: [{ name: "5 шт", price: 147 }, { name: "9 шт", price: 227 }, { name: "16 шт", price: 327 }] },
-        { id: 55, title: "Креветки 5 шт", cat: "zakuski", price: 299 },
-        { id: 56, title: "Сырные палочки 6 шт", cat: "zakuski", price: 229 },
+        ], quantities: [
+            { name: "2 шт", price: 147 },
+            { name: "5 шт", price: 277 },
+            { name: "7 шт", price: 367 }
+        ] },
+        { id: 52, title: "Наггетсы", cat: "zakuski", type: "variant-quantity-group", price: 147, img: "images/наггетсы.png", variants: [
+            { name: "Классические", img: "images/наггетсы.png" }
+        ], quantities: [
+            { name: "5 шт", price: 147 },
+            { name: "9 шт", price: 227 },
+            { name: "16 шт", price: 327 }
+        ] },
+        { id: 44, title: "Байтсы", cat: "baytsy", type: "option-group", price: 299, img: "images/байтсы классические.png", options: [
+            { name: "Классические", price: 299, img: "images/байтсы классические.png" },
+            { name: "В кисло-сладком соусе", price: 327, img: "images/байтсы в кисло-сладком соусе.png" },
+            { name: "В остром соусе", price: 327, img: "images/байтсы в остром соусе.png" }
+        ] },
+        { id: 55, title: "Креветки", cat: "zakuski", type: "variant-quantity-group", price: 299, img: "images/креветки.png", variants: [
+            { name: "Классические", img: "images/креветки.png" }
+        ], quantities: [
+            { name: "5 шт", price: 299 }
+        ] },
+        { id: 56, title: "Сырные палочки", cat: "zakuski", type: "variant-quantity-group", price: 229, img: "images/сырные палочки.png", variants: [
+            { name: "Классические", img: "images/сырные палочки.png" }
+        ], quantities: [
+            { name: "6 шт", price: 229 }
+        ] },
+        { id: 60, title: "Добрый Cola 0.4", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.4.png" },
+        { id: 61, title: "Добрый Cola 0.5", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.5.png" },
+        { id: 62, title: "Питьевая вода Bon Aqua 0.5", cat: "napitki", price: 0, img: "images/напитки/питьевая вода bon aqua 0.5.png" },
+        { id: 63, title: "Rich черный чай персик 0.5", cat: "napitki", price: 0, img: "images/напитки/rich черный чай персик 0.5.png" },
+        { id: 64, title: "Rich зеленый чай манго 0.5", cat: "napitki", price: 0, img: "images/напитки/rich зеленый чай манго 0.5.png" },
+        { id: 65, title: "Добрый Cola ж/б 0.33", cat: "napitki", price: 0, img: "images/напитки/добрый cola жб 0.33.png" },
         { id: 57, title: "Соус в ассортименте", cat: "sousy", type: "sauce-group", price: 40, img: "images/109.png", options: [
             { name: "Сырный соус", price: 40, img: "images/109.png" },
             { name: "Соус барбекю", price: 40, img: "images/110.png" },
@@ -1328,7 +1359,7 @@
     var imageByTitle = {
         "Макси Тейсти": "images/макси тейсти.png",
         "Мак Люкс": "images/мак люкс.png",
-        "Чизбургер x2": "images/чизбургер 2х.png",
+        "Двойной Чизбургер": "images/двойной чизбургер.png",
         "Чизбургер": "images/чизбургер.png",
         "ВПН Бургер": "images/ВПН бургер.png",
         "Блэк Бургер": "images/блэк бургер.png",
@@ -1623,7 +1654,11 @@
                 title.indexOf("наггер") != -1 ||
                 title.indexOf("хот-дог") != -1 ||
                 title.indexOf("чикенбургер") != -1 ||
-                title.indexOf("шаурма") != -1
+                title.indexOf("шаурма") != -1 ||
+                title.indexOf("впн") != -1 ||
+                title.indexOf("блэк бургер") != -1 ||
+                title.indexOf("биг мастер") != -1 ||
+                title.indexOf("лестер") != -1
             ) {
                 return "kuritsa";
             }
@@ -1653,6 +1688,33 @@
             }
 
             return "sneki";
+        }
+
+         /* НАПИТКИ */
+        if (getRazdelTovara(k) == "napitki") {
+
+            var title = k.title;
+
+            if (
+                title == "Добрый Cola 0.4" ||
+                title == "Добрый Cola 0.5" ||
+                title == "Добрый Cola ж/б 0.33"
+            ) {
+                return "holodnye";
+            }
+
+            if (
+                title == "Rich черный чай персик 0.5" ||
+                title == "Rich зеленый чай манго 0.5"
+            ) {
+                return "soki";
+            }
+
+            if (title == "Питьевая вода Bon Aqua 0.5") {
+                return "voda";
+            }
+
+            return "vse";
         }
 
         /* ПИЦЦЫ */
@@ -1751,7 +1813,6 @@
                     badgeHtml +
                 '</div>' +
                 '<div class="food-card-body">' +
-                    '<div class="cat-tag">' + catLabel(k.cat) + '</div>' +
                     '<h3 onclick="otkrytBlyudo(' + k.id + ')" style="cursor:pointer">' + k.title + '</h3>' +
                     '<div class="weight">' + k.weight + '</div>' +
                     '<div class="price-row">' +
@@ -2018,9 +2079,24 @@
 
         filtrovatEdu();
 
-        document.getElementById("catalog").scrollIntoView({
-            behavior: "smooth"
-        });
+        var menuFilters = document.querySelector(".main-menu-filters");
+
+        if (menuFilters) {
+
+            var header = document.querySelector("header");
+            var headerHeight = header ? header.offsetHeight : 0;
+
+            var targetPosition =
+                menuFilters.getBoundingClientRect().top +
+                window.pageYOffset -
+                headerHeight -
+                10;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+        }
     }
 
     function filtr(btn, cat) {
@@ -2090,6 +2166,69 @@
             ) {
                 result.push(k);
             }
+        }
+
+        if (tekushijFiltr == "burgeryrolly") {
+
+            var poryadok = [
+                "Криспи",
+                "Лестер",
+                "Чизбургер",
+                "Биг Мастер",
+                "Макси Тейсти",
+                "Мак Люкс",
+                "Чикенбургер",
+                "Двойной Чизбургер",
+                "ВПН Бургер",
+                "Блэк Бургер",
+                "Биф Ролл",
+                "Чикен Барбекю",
+                "Хот-дог",
+                "Шримп Ролл",
+                "Чикен Цезарь",
+                "Наггер"
+            ];
+
+            result.sort(function(a, b) {
+                return poryadok.indexOf(a.title) - poryadok.indexOf(b.title);
+            });
+        }
+
+        if (tekushijFiltr == "kartoshkasneki") {
+
+            var poryadokKartoshka = [
+                "Картофель Фри",
+                "Картофель по-деревенски",
+                "Стрипсы",
+                "Наггетсы",
+                "Байтсы",
+                "Креветки",
+                "Сырные палочки",
+                "Цезарь с курицей",
+                "Цезарь с креветками"
+            ];
+
+            result.sort(function(a, b) {
+                return poryadokKartoshka.indexOf(a.title) -
+                    poryadokKartoshka.indexOf(b.title);
+            });
+        }
+
+        if (tekushijFiltr == "napitki") {
+
+            var poryadokNapitki = [
+                "Добрый Cola 0.4",
+                "Добрый Cola 0.5",
+                "Питьевая вода Bon Aqua 0.5",
+                "Rich черный чай персик 0.5",
+                "Rich зеленый чай манго 0.5",
+                "Добрый Cola ж/б 0.33"
+            ];
+
+            result.sort(function(a, b) {
+                return poryadokNapitki.indexOf(a.title) -
+                       poryadokNapitki.indexOf(b.title);
+            });
         }
 
         renderKatalog(result);
