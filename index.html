@@ -310,7 +310,7 @@
 
         /* ── ПОИСК ── */
         .search-bar {
-            padding: 32px 60px;
+            padding: 32px 60px; 
             border-bottom: 1px solid var(--border);
             display: flex;
         }
@@ -350,8 +350,56 @@
             padding: 24px 60px;
             display: flex;
             gap: 10px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: thin;
+            white-space: nowrap;
+            border-bottom: none;
+        }
+
+        .main-menu-filters .filter-btn {
+            padding: 10px 24px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .main-menu-filters .filter-btn.active {
+            background: transparent;
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        /* ── ПОДКАТЕГОРИИ ── */
+        .subcategory-filters {
+            padding: 10px 60px 18px;
+            display: flex;
+            gap: 10px;
             flex-wrap: wrap;
-            border-bottom: 1px solid var(--border);
+            min-height: 0;
+        }
+
+        .subcategory-filters:empty {
+            display: none;
+        }
+
+        .subcategory-btn {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            padding: 7px 14px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .subcategory-btn:hover,
+        .subcategory-btn.active {
+            background: var(--card);
+            color: var(--white);
         }
 
         .filter-btn {
@@ -954,6 +1002,23 @@
 
             .filters { padding: 16px 20px; }
 
+            .subcategory-filters {
+                padding: 8px 20px 14px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+
+            .subcategory-filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .subcategory-btn {
+                flex-shrink: 0;
+                font-size: 11px;
+                padding: 7px 12px;
+            }
+
             .section-title { padding: 32px 20px 20px; }
 
             .catalog {
@@ -1003,6 +1068,21 @@
         }
 
         @media (max-width: 480px) {
+
+            .main-menu-filters {
+                padding: 12px;
+                gap: 7px;
+            }
+
+            .main-menu-filters .filter-btn {
+                padding: 7px 12px;
+                font-size: 10px;
+            }
+
+            .subcategory-filters {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
 
             nav.menu .order-btn {
                 padding: 6px 11px;
@@ -1078,33 +1158,45 @@
 </div>
 
 <!-- ФИЛЬТРЫ -->
-<div class="filters">
-    <button class="filter-btn active" onclick="filtr(this, 'vse')">Всё меню</button>
-    <button class="filter-btn" onclick="filtr(this, 'burgery')">Бургеры</button>
-    <button class="filter-btn" onclick="filtr(this, 'krylyshki')">Крылышки</button>
-    <button class="filter-btn" onclick="filtr(this, 'pitstsa')">Пиццы</button>
-    <button class="filter-btn" onclick="filtr(this, 'rolly')">Роллы</button>
-    <button class="filter-btn" onclick="filtr(this, 'stripsy')">Стрипсы</button>
-    <button class="filter-btn" onclick="filtr(this, 'baytsy')">Байтсы</button>
-    <button class="filter-btn" onclick="filtr(this, 'kartoshka')">Картошка</button>
-    <button class="filter-btn" onclick="filtr(this, 'zakuski')">Закуски</button>
-    <button class="filter-btn" onclick="filtr(this, 'salaty')">Салаты</button>
-    <button class="filter-btn" onclick="filtr(this, 'sousy')">Соусы</button>
+<!-- ОСНОВНЫЕ РАЗДЕЛЫ МЕНЮ -->
+<div class="filters main-menu-filters">
+
+    <button class="filter-btn active" onclick="filtr(this, 'burgeryrolly')">
+        Бургеры и роллы
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'krylyshki')">
+        Крылышки
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'kartoshkasneki')">
+        Картофель, снеки и салаты
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'napitki')">
+        Напитки
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'kombo')">
+        Комбо
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'pitstsa')">
+        Пиццы
+    </button>
+
+    <button class="filter-btn" onclick="filtr(this, 'sousy')">
+        Соусы, пакет
+    </button>
+
 </div>
+
+<!-- ПОДКАТЕГОРИИ -->
+<div class="subcategory-filters" id="subcategoryFilters"></div>
 
 <!-- МЕНЮ -->
-<div class="section-title" id="catalog">Наше меню</div>
-<div class="catalog" id="catalogGrid"></div>
 
-<!-- ПОПУЛЯРНЫЕ ТОВАРЫ (DOM задание) -->
-<div class="dom-section">
-    <h2>Хиты продаж</h2>
-    <ul id="tovaryList"></ul>
-    <table id="tovaryTable">
-        <thead><tr><th>Блюдо</th><th>Цена</th></tr></thead>
-        <tbody></tbody>
-    </table>
-</div>
+<div class="catalog" id="catalogGrid"></div>
 
 <!-- КНОПКА МОДАЛ О НАС -->
 <button class="open-modal-btn" onclick="otkrytModal()">О MC.HOUSE</button>
@@ -1187,10 +1279,10 @@
         { id: 18, title: "Чикен Цезарь", cat: "burgery", price: 159, badge: "Новинка" },
         { id: 19, title: "Наггер", cat: "burgery", price: 149, badge: "Новинка" },
         { id: 20, title: "Чикенбургер", cat: "burgery", price: 149, badge: "Новинка" },
-        { id: 21, title: "Пицца Ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
-        { id: 22, title: "Пицца Куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
-        { id: 23, title: "Пицца Мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
-        { id: 24, title: "Пицца Грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png", options: [{ name: "Мини", price: 297 }, { name: "Средняя", price: 497 }] },
+        { id: 21, title: "Пицца Ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
+        { id: 22, title: "Пицца Куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
+        { id: 23, title: "Пицца Мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
+        { id: 24, title: "Пицца Грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
         { id: 25, title: "Пицца Пепперони", cat: "pitstsa", price: 497, img: "images/пепперони.png" },
         { id: 26, title: "Пицца Маргарита", cat: "pitstsa", price: 497, img: "images/маргарита.png" },
         { id: 27, title: "Пицца Цезарь", cat: "pitstsa", price: 497, img: "images/цезарь пицца.png" },
@@ -1280,14 +1372,56 @@
         menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
     }
 
-    var tovary = [
-        { name: "Макси Тейсти", price: "299 ₽" },
-        { name: "Крылышки 25 шт", price: "979 ₽" },
-        { name: "Пицца Ассорти средняя", price: "497 ₽" },
-        { name: "Цезарь с креветками", price: "269 ₽" },
-    ];
+    var tekushijFiltr = "burgeryrolly";
+    var tekushijPodfiltr = "vse";
 
-    var tekushijFiltr = "vse";
+    var strukturaMenu = {
+        burgeryrolly: {
+            name: "Бургеры и роллы",
+            subcategories: [
+                { id: "vse", name: "Все" },
+                { id: "govyadina", name: "Говядина" },
+                { id: "kuritsa", name: "Курица" },
+                { id: "ryba", name: "Рыба" }
+            ]
+        },
+
+        krylyshki: {
+            name: "Крылышки",
+            subcategories: [ ]
+        },
+        kartoshkasneki: {
+            name: "Картофель, снеки и салаты",
+            subcategories: [
+                { id: "vse", name: "Все" },
+                { id: "kartoshka", name: "Картофель" },
+                { id: "sneki", name: "Снеки" },
+                { id: "salaty", name: "Салаты" }
+            ]
+        },
+        napitki: {
+            name: "Напитки",
+            subcategories: [
+                { id: "vse", name: "Все" },
+                { id: "holodnye", name: "Холодные напитки" },
+                { id: "soki", name: "Соки" },
+                { id: "voda", name: "Вода" }
+            ]
+        },
+        kombo: {
+            name: "Комбо",
+            subcategories: []
+        },
+        pitstsa: {
+            name: "Пиццы",
+            subcategories: [ ]
+        },
+        sousy: {
+            name: "Соусы, пакет",
+            subcategories: []
+        }
+    };
+
     var fonyStranicy = ["#f5f4f1", "#f2f6f4", "#f6f2f2", "#f2f2f6", "#f4f6f2"];
     var tekushijFon = 0;
 
@@ -1316,26 +1450,10 @@
             highlightEl.style.fontWeight = "500";
         }
 
-        var ul = document.getElementById("tovaryList");
-        for (var i = 0; i < tovary.length; i++) {
-            var li = document.createElement("li");
-            li.innerText = tovary[i].name + " — " + tovary[i].price;
-            ul.appendChild(li);
-        }
-
-        var tbody = document.querySelector("#tovaryTable tbody");
-        for (var i = 0; i < 3; i++) {
-            var tr = document.createElement("tr");
-            var td1 = document.createElement("td");
-            var td2 = document.createElement("td");
-            td1.innerText = tovary[i].name;
-            td2.innerText = tovary[i].price;
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tbody.appendChild(tr);
-        }
-
-        renderKatalog(menu);
+        tekushijFiltr = "burgeryrolly";
+        tekushijPodfiltr = "vse";
+        renderPodkategorii();
+        filtrovatEdu();
         updateAboutStatus();
         setInterval(updateAboutStatus, 60000);
     };
@@ -1441,6 +1559,171 @@
             sousy: "Соусы"
         };
         return metki[c] || c;
+    }
+    
+    function getRazdelTovara(k) {
+
+        if (k.cat == "burgery" || k.cat == "rolly") {
+            return "burgeryrolly";
+        }
+
+         if (k.cat == "krylyshki") {
+            return "krylyshki";
+        }
+
+        if (
+            k.cat == "kartoshka" ||
+            k.cat == "zakuski" ||
+            k.cat == "baytsy" ||
+            k.cat == "stripsy" ||
+            k.cat == "salaty"
+        ) {
+            return "kartoshkasneki";
+        }
+
+        if (k.cat == "napitki") {
+            return "napitki";
+        }
+
+        if (k.cat == "kombo") {
+            return "kombo";
+        }
+
+        if (k.cat == "pitstsa") {
+            return "pitstsa";
+        }
+
+        if (k.cat == "sousy") {
+            return "sousy";
+        }
+
+        return "";
+    }
+    
+    function getPodkategoriyaTovara(k) {
+
+        /* БУРГЕРЫ И РОЛЛЫ */
+        if (getRazdelTovara(k) == "burgeryrolly") {
+
+            var title = k.title.toLowerCase();
+
+            if (
+                title.indexOf("шримп") != -1 ||
+                title.indexOf("кревет") != -1
+            ) {
+                return "ryba";
+            }
+
+            if (
+                title.indexOf("чикен") != -1 ||
+                title.indexOf("криспи") != -1 ||
+                title.indexOf("наггер") != -1 ||
+                title.indexOf("хот-дог") != -1 ||
+                title.indexOf("чикенбургер") != -1 ||
+                title.indexOf("шаурма") != -1
+            ) {
+                return "kuritsa";
+            }
+
+            return "govyadina";
+        }
+
+        /* КРЫЛЫШКИ */
+        if (getRazdelTovara(k) == "krylyshki") {
+
+            if (k.title.toLowerCase().indexOf("соус") != -1) {
+                return "krylyshki-sous";
+            }
+
+            return "krylyshki";
+        }
+
+        /* КАРТОФЕЛЬ / СНЕКИ / САЛАТЫ */
+        if (getRazdelTovara(k) == "kartoshkasneki") {
+
+            if (k.cat == "kartoshka") {
+                return "kartoshka";
+            }
+
+            if (k.cat == "salaty") {
+                return "salaty";
+            }
+
+            return "sneki";
+        }
+
+        /* ПИЦЦЫ */
+        if (getRazdelTovara(k) == "pitstsa") {
+
+            if (k.options) {
+                for (var i = 0; i < k.options.length; i++) {
+
+                    if (k.options[i].name == "Мини") {
+                        return "mini";
+                    }
+                }
+            }
+
+            return "standart";
+        }
+
+        return "vse";
+    }
+    
+    function renderPodkategorii() {
+
+        var container = document.getElementById("subcategoryFilters");
+
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        var razdel = strukturaMenu[tekushijFiltr];
+
+        if (!razdel || !razdel.subcategories.length) {
+            return;
+        }
+
+        for (var i = 0; i < razdel.subcategories.length; i++) {
+
+            var sub = razdel.subcategories[i];
+
+            var btn = document.createElement("button");
+
+            btn.className = "subcategory-btn";
+
+            if (sub.id == tekushijPodfiltr) {
+                 btn.classList.add("active");
+            }
+
+            btn.innerText = sub.name;
+
+            btn.setAttribute("data-sub", sub.id);
+
+            btn.onclick = function() {
+                filtrPodkategoriya(
+                    this,
+                    this.getAttribute("data-sub")
+                );
+            };
+
+            container.appendChild(btn);
+        }
+    }
+
+    function filtrPodkategoriya(btn, podcat) {
+
+        tekushijPodfiltr = podcat;
+
+        var btns = document.querySelectorAll(".subcategory-btn");
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+
+        btn.classList.add("active");
+
+        filtrovatEdu();
     }
 
     function renderKatalog(massiv) {
@@ -1711,40 +1994,101 @@
     }
 
     function otkrytVseMenu(e) {
+
         e.preventDefault();
-        tekushijFiltr = "vse";
+
+        tekushijFiltr = "burgeryrolly";
+        tekushijPodfiltr = "vse";
+
         document.getElementById("searchInput").value = "";
 
         var btns = document.querySelectorAll(".filter-btn");
+
         for (var i = 0; i < btns.length; i++) {
-            btns[i].classList.toggle("active", i == 0);
+            btns[i].classList.toggle(
+                "active",
+                i == 0
+            );
         }
 
+        renderPodkategorii();
+
         filtrovatEdu();
-        document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+
+        document.getElementById("catalog").scrollIntoView({
+            behavior: "smooth"
+        });
     }
 
     function filtr(btn, cat) {
         tekushijFiltr = cat;
+        tekushijPodfiltr = "vse";
         var btns = document.querySelectorAll(".filter-btn");
         for (var i = 0; i < btns.length; i++) {
             btns[i].classList.remove("active");
         }
         btn.classList.add("active");
+        renderPodkategorii();
         filtrovatEdu();
     }
 
     function filtrovatEdu() {
+
         var query = document.getElementById("searchInput").value.toLowerCase();
+
         var result = [];
+
         for (var i = 0; i < menu.length; i++) {
+
             var k = menu[i];
-            var podhoditPoCat = tekushijFiltr == "vse" || k.cat == tekushijFiltr;
-            var podhoditPoPoisku = k.title.toLowerCase().indexOf(query) != -1;
-            if (podhoditPoCat && podhoditPoPoisku) {
+
+            var razdelTovara = getRazdelTovara(k);
+
+            var podhoditPoRazdelu =
+                razdelTovara == tekushijFiltr;
+
+            var podhoditPoPodkategorii = true;
+
+            if (tekushijPodfiltr != "vse") {
+
+                if (tekushijFiltr == "pitstsa") {
+
+                    if (tekushijPodfiltr == "mini") {
+
+                        podhoditPoPodkategorii =
+                            k.options &&
+                            k.options.some(function(option) {
+                                return option.name == "Мини";
+                            });
+
+                    } else if (tekushijPodfiltr == "standart") {
+
+                        podhoditPoPodkategorii =
+                            !k.options ||
+                            k.options.some(function(option) {
+                                 return option.name == "Средняя";
+                            });
+                    }
+
+                } else {
+
+                    podhoditPoPodkategorii =
+                        getPodkategoriyaTovara(k) == tekushijPodfiltr;
+                }
+            }
+
+            var podhoditPoPoisku =
+                k.title.toLowerCase().indexOf(query) != -1;
+
+            if (
+                podhoditPoRazdelu &&
+                podhoditPoPodkategorii &&
+                podhoditPoPoisku
+            ) {
                 result.push(k);
             }
         }
+
         renderKatalog(result);
     }
 
