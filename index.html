@@ -464,6 +464,8 @@
             position: relative;
             border-radius: 18px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
         }
 
         .food-card:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.1); transform: translateY(-2px); }
@@ -503,7 +505,12 @@
 
         .food-cover .badge.new { background: var(--yellow); color: #171512; }
 
-        .food-card-body { padding: 14px 6px 18px; }
+        .food-card-body {
+            padding: 14px 6px 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
 
         .food-card .cat-tag {
             font-size: 10px;
@@ -522,18 +529,25 @@
             letter-spacing: 1px;
             margin-bottom: 4px;
             line-height: 1.1;
+            min-height: 44px;
         }
 
         .food-card .weight {
             font-size: 11px;
             color: var(--muted);
             margin-bottom: 14px;
+            min-height: 14px;
         }
 
         .food-card .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: nowrap;
+            gap: 6px;
+            min-width: 0;
+            margin-top: auto;
+            min-height: 38px;
         }
 
         .food-card .price {
@@ -541,6 +555,9 @@
             font-size: 24px;
             font-weight: 700;
             color: var(--white);
+            white-space: nowrap;
+            flex: 0 0 auto;
+            width: max-content;
         }
 
         .food-card .price .old {
@@ -1038,9 +1055,19 @@
 
             .food-card .weight { font-size: 10px; margin-bottom: 8px; }
 
-            .food-card .price-row { flex-wrap: wrap; gap: 8px; }
+            .food-card .price-row { 
+                flex-wrap: nowrap; 
+                gap: 6px;
+                align-items: center; }
 
-            .food-card .price { font-size: 18px; }
+            .food-card .price {
+                 font-size: 18px;
+                white-space: nowrap;
+                flex-shrink: 0 0 auto;
+                width: max-content; }
+            .choice-btn {
+                white-space: nowrap;
+                flex-shrink: 0; }
 
             .food-card .price .old { font-size: 11px; }
 
@@ -1338,12 +1365,12 @@
         ], quantities: [
             { name: "6 шт", price: 229 }
         ] },
-        { id: 60, title: "Добрый Cola 0.4", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.4.png" },
-        { id: 61, title: "Добрый Cola 0.5", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.5.png" },
-        { id: 62, title: "Питьевая вода Bon Aqua 0.5", cat: "napitki", price: 0, img: "images/напитки/питьевая вода bon aqua 0.5.png" },
-        { id: 63, title: "Rich черный чай персик 0.5", cat: "napitki", price: 0, img: "images/напитки/rich черный чай персик 0.5.png" },
-        { id: 64, title: "Rich зеленый чай манго 0.5", cat: "napitki", price: 0, img: "images/напитки/rich зеленый чай манго 0.5.png" },
-        { id: 65, title: "Добрый Cola ж/б 0.33", cat: "napitki", price: 0, img: "images/напитки/добрый cola жб 0.33.png" },
+        { id: 60, title: "Добрый кола 0.4", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.4.png" },
+        { id: 61, title: "Добрый кола 0.5", cat: "napitki", price: 0, img: "images/напитки/добрый cola 0.5.png" },
+        { id: 62, title: "Питьевая вода Бон Аква 0.5", cat: "napitki", price: 0, img: "images/напитки/питьевая вода bon aqua 0.5.png" },
+        { id: 63, title: "Рич черный чай персик 0.5", cat: "napitki", price: 0, img: "images/напитки/rich черный чай персик 0.5.png" },
+        { id: 64, title: "Рич зеленый чай манго 0.5", cat: "napitki", price: 0, img: "images/напитки/rich зеленый чай манго 0.5.png" },
+        { id: 65, title: "Добрый кола ж/б 0.33", cat: "napitki", price: 0, img: "images/напитки/добрый cola жб 0.33.png" },
         { id: 57, title: "Соус в ассортименте", cat: "sousy", type: "sauce-group", price: 40, img: "images/109.png", options: [
             { name: "Сырный соус", price: 40, img: "images/109.png" },
             { name: "Соус барбекю", price: 40, img: "images/110.png" },
@@ -2113,61 +2140,64 @@
 
     function filtrovatEdu() {
 
-        var query = document.getElementById("searchInput").value.toLowerCase();
+    var query = document.getElementById("searchInput").value
+        .toLowerCase()
+        .trim();
 
-        var result = [];
+    var result = [];
+
+    /*
+     * ЕСЛИ ЕСТЬ ПОИСК
+     * Ищем ПО ВСЕМУ МЕНЮ, независимо от выбранного раздела
+     */
+    if (query != "") {
 
         for (var i = 0; i < menu.length; i++) {
 
             var k = menu[i];
 
-            var razdelTovara = getRazdelTovara(k);
+            var nazvanie = k.title.toLowerCase();
 
-            var podhoditPoRazdelu =
-                razdelTovara == tekushijFiltr;
-
-            var podhoditPoPodkategorii = true;
-
-            if (tekushijPodfiltr != "vse") {
-
-                if (tekushijFiltr == "pitstsa") {
-
-                    if (tekushijPodfiltr == "mini") {
-
-                        podhoditPoPodkategorii =
-                            k.options &&
-                            k.options.some(function(option) {
-                                return option.name == "Мини";
-                            });
-
-                    } else if (tekushijPodfiltr == "standart") {
-
-                        podhoditPoPodkategorii =
-                            !k.options ||
-                            k.options.some(function(option) {
-                                 return option.name == "Средняя";
-                            });
-                    }
-
-                } else {
-
-                    podhoditPoPodkategorii =
-                        getPodkategoriyaTovara(k) == tekushijPodfiltr;
-                }
-            }
-
-            var podhoditPoPoisku =
-                k.title.toLowerCase().indexOf(query) != -1;
-
-            if (
-                podhoditPoRazdelu &&
-                podhoditPoPodkategorii &&
-                podhoditPoPoisku
-            ) {
+            if (nazvanie.indexOf(query) != -1) {
                 result.push(k);
             }
         }
 
+        /*
+         * Если нашли товары —
+         * автоматически определяем раздел первого найденного товара
+         */
+        if (result.length > 0) {
+
+            var razdel = getRazdelTovara(result[0]);
+
+            tekushijFiltr = razdel;
+            tekushijPodfiltr = "vse";
+
+            /*
+             * Переключаем активную кнопку раздела
+             */
+            var btns = document.querySelectorAll(".main-menu-filters .filter-btn");
+
+            for (var i = 0; i < btns.length; i++) {
+
+                var onclickText = btns[i].getAttribute("onclick") || "";
+
+                btns[i].classList.toggle(
+                    "active",
+                    onclickText.indexOf("'" + razdel + "'") != -1
+                );
+            }
+
+            /*
+             * Обновляем подкатегории
+             */
+            renderPodkategorii();
+        }
+
+        /*
+         * Сортировка бургеров при поиске
+         */
         if (tekushijFiltr == "burgeryrolly") {
 
             var poryadok = [
@@ -2190,30 +2220,14 @@
             ];
 
             result.sort(function(a, b) {
-                return poryadok.indexOf(a.title) - poryadok.indexOf(b.title);
+                return poryadok.indexOf(a.title) -
+                       poryadok.indexOf(b.title);
             });
         }
 
-        if (tekushijFiltr == "kartoshkasneki") {
-
-            var poryadokKartoshka = [
-                "Картофель Фри",
-                "Картофель по-деревенски",
-                "Стрипсы",
-                "Наггетсы",
-                "Байтсы",
-                "Креветки",
-                "Сырные палочки",
-                "Цезарь с курицей",
-                "Цезарь с креветками"
-            ];
-
-            result.sort(function(a, b) {
-                return poryadokKartoshka.indexOf(a.title) -
-                    poryadokKartoshka.indexOf(b.title);
-            });
-        }
-
+        /*
+         * Сортировка напитков при поиске
+         */
         if (tekushijFiltr == "napitki") {
 
             var poryadokNapitki = [
@@ -2232,7 +2246,95 @@
         }
 
         renderKatalog(result);
+
+        return;
     }
+
+
+    /*
+     * ЕСЛИ ПОИСК ПУСТОЙ
+     * Работаем по обычной системе разделов и подкатегорий
+     */
+    for (var i = 0; i < menu.length; i++) {
+
+        var k = menu[i];
+
+        var razdelTovara = getRazdelTovara(k);
+
+        var podhoditPoRazdelu =
+            razdelTovara == tekushijFiltr;
+
+        var podhoditPoPodkategorii = true;
+
+        if (tekushijPodfiltr != "vse") {
+
+            podhoditPoPodkategorii =
+                getPodkategoriyaTovara(k) == tekushijPodfiltr;
+        }
+
+        if (
+            podhoditPoRazdelu &&
+            podhoditPoPodkategorii
+        ) {
+            result.push(k);
+        }
+    }
+
+
+    /*
+     * Порядок бургеров
+     */
+    if (tekushijFiltr == "burgeryrolly") {
+
+        var poryadok = [
+            "Криспи",
+            "Лестер",
+            "Чизбургер",
+            "Биг Мастер",
+            "Макси Тейсти",
+            "Мак Люкс",
+            "Чикенбургер",
+            "Двойной Чизбургер",
+            "ВПН Бургер",
+            "Блэк Бургер",
+            "Биф Ролл",
+            "Чикен Барбекю",
+            "Хот-дог",
+            "Шримп Ролл",
+            "Чикен Цезарь",
+            "Наггер"
+        ];
+
+        result.sort(function(a, b) {
+            return poryadok.indexOf(a.title) -
+                   poryadok.indexOf(b.title);
+        });
+    }
+
+
+    /*
+     * Порядок напитков
+     */
+    if (tekushijFiltr == "napitki") {
+
+        var poryadokNapitki = [
+            "Добрый Cola 0.4",
+            "Добрый Cola 0.5",
+            "Питьевая вода Bon Aqua 0.5",
+            "Rich черный чай персик 0.5",
+            "Rich зеленый чай манго 0.5",
+            "Добрый Cola ж/б 0.33"
+        ];
+
+        result.sort(function(a, b) {
+            return poryadokNapitki.indexOf(a.title) -
+                   poryadokNapitki.indexOf(b.title);
+        });
+    }
+
+
+    renderKatalog(result);
+}
 
 </script>
 </body>
