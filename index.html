@@ -190,7 +190,7 @@
             font-family: 'Russo One', sans-serif;
             font-weight: 400;
             font-style: normal;
-            font-size: clamp(60px, 8vw, 110px);
+            font-size: clamp(42px, 7vw, 110px);
             line-height: 0.92;
             text-transform: uppercase;
             margin-bottom: 28px;
@@ -303,7 +303,7 @@
 
         .hero-image img {
             width: 100%;
-            max-width: 620px;
+            max-width: 100%;
             height: auto;
             mix-blend-mode: multiply;
         }
@@ -353,9 +353,12 @@
             flex-wrap: nowrap;
             overflow-x: auto;
             overflow-y: hidden;
-            scrollbar-width: thin;
+            scrollbar-width: none;
             white-space: nowrap;
             border-bottom: none;
+        }
+        .filters::-webkit-scrollbar {
+            display: none;
         }
 
         .main-menu-filters .filter-btn {
