@@ -942,25 +942,164 @@
             -ms-user-select: none;
         }
         
+        /* ── ПОДВАЛ ── */
+
         footer {
-            border-top: 1px solid var(--border);
-            padding: 36px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--muted);
-            font-size: 13px;
+            position: relative;
+            width: 100%;
+            height: 535px;
+            background: #f5f4f1;
+            color: #111111;
+            overflow: hidden;
+            padding: 88px 52px 0;
+            box-sizing: border-box;
         }
 
-        footer .logo-sm {
+        .footer-info {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 2fr 1.25fr 1fr 0.8fr;
+            column-gap: 40px;
+            width: 100%;
+        }
+
+        .footer-column {
+            min-width: 0;
+        }
+
+        .footer-title {
+            margin: 0 0 8px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 16px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .footer-text {
+            margin: 0;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            line-height: 1.25;
+            font-weight: 400;
+            color: #333333;
+        }
+
+        .footer-logo {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            bottom: -35px;
+
+            width: 100%;
+            white-space: nowrap;
+            text-align: center;
+
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 22px;
+            font-size: 520px;
+            line-height: 0.78;
             font-weight: 900;
-            color: var(--white);
-            letter-spacing: 2px;
+            letter-spacing: -0.04em;
+
+            color: #050505;
+            margin: 0;
+            padding: 0;
+
+            transform: scaleX(1);
+            transform-origin: center bottom;
+
+            pointer-events: none;
+            user-select: none;
         }
 
-        footer .logo-sm span { color: var(--red); }
+
+        /* ── ПОДВАЛ: ПЛАНШЕТ ── */
+
+        @media (max-width: 900px) {
+
+            footer {
+                height: 500px;
+                padding: 65px 32px 0;
+            }
+
+            .footer-info {
+                grid-template-columns: 1.5fr 1.2fr 1fr;
+                row-gap: 35px;
+                column-gap: 25px;
+            }
+
+            .footer-logo {
+                font-size: clamp(190px, 30vw, 300px);
+                bottom: -75px;
+            }
+        }
+
+
+            /* ── ПОДВАЛ: MOBILE ── */
+
+        @media (max-width: 600px) {
+
+            footer {
+                height: 620px;
+                padding: 48px 20px 0;
+            }
+
+            .footer-info {
+                grid-template-columns: 1fr 1fr;
+                column-gap: 28px;
+                row-gap: 32px;
+            }
+
+            .footer-column:first-child {
+                grid-column: 1 / -1;
+            }
+
+            .footer-title {
+                font-size: 15px;
+                margin-bottom: 7px;
+            }
+
+            .footer-text {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+
+            .footer-logo {
+                font-size: clamp(125px, 31vw, 190px);
+                bottom: -38px;
+                letter-spacing: -0.03em;
+            }
+        }
+
+
+        /* ── МАЛЕНЬКИЙ MOBILE ── */
+
+        @media (max-width: 400px) {
+
+            footer {
+                height: 560px;
+                padding: 42px 18px 0;
+            }
+
+            .footer-info {
+                column-gap: 18px;
+                row-gap: 28px;
+            }
+
+            .footer-title {
+                font-size: 14px;
+            }
+
+            .footer-text {
+                font-size: 12px;
+            }
+
+            .footer-logo {
+                font-size: 28vw;
+                bottom: -30px;
+            }
+        }
 
         /* ── МОДАЛ О КОМПАНИИ ── */
         .modal-overlay {
@@ -1272,15 +1411,14 @@
             }
 
             .order-step:not(:last-of-type)::after {
-                content: '↓';
+                content: '';
                 position: absolute;
                 left: 50%;
-                bottom: -23px;
+                bottom: -14px;
                 transform: translateX(-50%);
-                font-family: 'Barlow', sans-serif;
-                font-size: 20px;
-                font-weight: 700;
-                color: var(--red);
+                width: 2px;
+                height: 14px;
+                background: var(--red);
                 z-index: 5;
             }
 
@@ -1352,10 +1490,9 @@
             .open-modal-btn { margin: 0 20px 40px; }
 
             footer {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-                padding: 24px 20px;
+                height: 620px;
+                padding: 48px 20px 0;
+                text-align: left;
             }
 
             .modal-box { padding: 28px; }
@@ -1661,9 +1798,43 @@
 
 <!-- ПОДВАЛ -->
 <footer>
-    <div class="logo-sm">MC<span>.</span>HOUSE</div>
-    <div>©️ 2025 MC.House. Все права защищены.</div>
-    <div>Меню · О нас</div>
+
+    <div class="footer-info">
+
+        <div class="footer-column">
+            <h3 class="footer-title">Адрес:</h3>
+            <p class="footer-text">
+                Трасса Аргун-Червлённая, ст. Петропавловская,<br>
+                Чеченская Республика, Россия, 366010
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">Контакты:</h3>
+            <p class="footer-text">
+                +7 985 074-91-01 (WhatsApp)<br>
+                mchouse.auto@gmail.com
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">Часы работы:</h3>
+            <p class="footer-text">
+                12:00 - 00:00 сб-чт<br>
+                13:30 - 00:00 пт
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3 class="footer-title">Напишите нам!</h3>
+        </div>
+
+    </div>
+
+    <div class="footer-logo">
+        MC<span>.</span>HOUSE
+    </div>
+
 </footer>
 
 <!-- МОДАЛ О КОМПАНИИ -->
