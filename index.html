@@ -2024,8 +2024,59 @@
         "Цезарь с креветками": "images/салат цезарь с креветками.png"
     };
 
+    var imagePathFix = {
+        "images/ассорти.png": "images/Ассорти.png",
+        "images/биг мастер острый.png": "images/Биг Мастер острый.png",
+        "images/биг мастер.png": "images/Биг Мастер.png",
+        "images/биф ролл.png": "images/Биф Ролл.png",
+        "images/блэк бургер.png": "images/Блэк бургер.png",
+        "images/грибная.png": "images/Грибная.png",
+        "images/двойной чизбургер.png": "images/Двойной Чизбургер.png",
+        "images/креветки.png": "images/Креветки.png",
+        "images/криспи острый.png": "images/Криспи Острый.png",
+        "images/криспи.png": "images/Криспи.png",
+        "images/крылышки в к-с соусе.png": "images/Крылышки в к-с соусе.png",
+        "images/крылышки в остром соусе.png": "images/Крылышки в остром соусе.png",
+        "images/крылышки острые.png": "images/Крылышки острые.png",
+        "images/крылышки.png": "images/Крылышки.png",
+        "images/куриная.png": "images/Куриная.png",
+        "images/лестер острый.png": "images/Лестер острый.png",
+        "images/лестер.png": "images/Лестер.png",
+        "images/мак комбо.png": "images/Мак Комбо.png",
+        "images/мак люкс.png": "images/Мак Люкс.png",
+        "images/макси тейсти.png": "images/Макси Тейсти.png",
+        "images/маргарита.png": "images/Маргарита.png",
+        "images/мясная.png": "images/Мясная.png",
+        "images/наггер.png": "images/Наггер.png",
+        "images/наггетсы.png": "images/Наггетсы.png",
+        "images/пепперони.png": "images/Пепперони.png",
+        "images/по-деревенски большая.png": "images/По-деревенски большая.png",
+        "images/по-деревенски стандарт.png": "images/По-деревенски стандарт.png",
+        "images/стрипсы острые.png": "images/Стрипсы острые.png",
+        "images/стрипсы.png": "images/Стрипсы.png",
+        "images/сырные палочки.png": "images/Сырные палочки.png",
+        "images/фри большая.png": "images/Фри большая.png",
+        "images/фри стандарт.png": "images/Фри стандарт.png",
+        "images/хот-дог.png": "images/Хот-дог.png",
+        "images/цезарь пицца.png": "images/Цезарь пицца.png",
+        "images/чизбургер.png": "images/Чизбургер.png",
+        "images/чикен барбекю.png": "images/Чикен Барбекю.png",
+        "images/чикен цезарь.png": "images/Чикен Цезарь.png",
+        "images/чикенбургер.png": "images/Чикенбургер.png",
+        "images/шримп ролл.png": "images/Шримп Ролл.png",
+
+        "images/байтсы классик.png": "images/Байтсы классические.png",
+        "images/байтсы в к-с соусе.png": "images/Байтсы в кисло-сладком соусе.png"
+    };
+
     for (var imageIndex = 0; imageIndex < menu.length; imageIndex++) {
-        menu[imageIndex].img = menu[imageIndex].img || imageByTitle[menu[imageIndex].title] || "images/макси тейсти.png";
+
+        var currentImage = menu[imageIndex].img ||
+            imageByTitle[menu[imageIndex].title] ||
+            "images/Макси Тейсти.png";
+
+        menu[imageIndex].img = imagePathFix[currentImage] || currentImage;
+
         menu[imageIndex].weight = "Порция";
         menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
     }
