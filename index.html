@@ -1042,7 +1042,7 @@
         @media (max-width: 600px) {
 
             footer {
-                height: 620px;
+                height: 430px;
                 padding: 48px 20px 0;
             }
 
@@ -1079,7 +1079,7 @@
         @media (max-width: 400px) {
 
             footer {
-                height: 560px;
+                height: 400px;
                 padding: 42px 18px 0;
             }
 
@@ -1411,7 +1411,19 @@
                 border-radius: 12px;
             }
 
-            .order-step:not(:last-of-type)::after {
+            .order-step:nth-of-type(1)::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -14px;
+                transform: translateX(-50%);
+                width: 2px;
+                height: 14px;
+                background: #171512;
+                z-index: 5;
+            }
+
+            .order-step:nth-of-type(2)::after {
                 content: '';
                 position: absolute;
                 left: 50%;
@@ -1420,6 +1432,30 @@
                 width: 2px;
                 height: 14px;
                 background: var(--red);
+                z-index: 5;
+            }
+
+            .order-step:nth-of-type(3)::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -14px;
+                transform: translateX(-50%);
+                width: 2px;
+                height: 14px;
+                background: var(--yellow);
+                z-index: 5;
+            }
+
+            .order-step:nth-of-type(4)::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -14px;
+                transform: translateX(-50%);
+                width: 2px;
+                height: 14px;
+                background: #171512;
                 z-index: 5;
             }
 
@@ -1903,9 +1939,9 @@
         { id: 9, title: "Хот-дог", cat: "burgery", price: 139 },
         { id: 10, title: "Крылышки", cat: "krylyshki", type: "wing-group", price: 247, img: "images/крылышки.png" },
         { id: 11, title: "Крылышки в соусе", cat: "krylyshki", type: "wing-group", price: 287, img: "images/крылышки в к-с соусе.png" },
-        { id: 18, title: "Чикен Цезарь", cat: "burgery", price: 159, badge: "Новинка" },
-        { id: 19, title: "Наггер", cat: "burgery", price: 149, badge: "Новинка" },
-        { id: 20, title: "Чикенбургер", cat: "burgery", price: 149, badge: "Новинка" },
+        { id: 18, title: "Чикен Цезарь", cat: "burgery", price: 159 },
+        { id: 19, title: "Наггер", cat: "burgery", price: 149 },
+        { id: 20, title: "Чикенбургер", cat: "burgery", price: 149 },
         { id: 21, title: "Пицца Ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
         { id: 22, title: "Пицца Куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
         { id: 23, title: "Пицца Мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png", options: [{ name: "Мини", price: 297 }, { name: "Стандарт", price: 497 }] },
@@ -1965,7 +2001,7 @@
         ] },
         { id: 60, title: "Добрый кола 0.4", cat: "napitki", price: 100, img: "images/напитки/Добрый кола 0.4.png" },
         { id: 61, title: "Добрый кола 0.5", cat: "napitki", price: 139, img: "images/напитки/Добрый кола 0.5.png" },
-        { id: 62, title: "Питьевая вода Бон Аква 0.5", cat: "napitki", price: 50, img: "images/напитки/питьевая вода bon aqua 0.5.png" },
+        { id: 62, title: "Бон Аква 0.5", cat: "napitki", price: 50, img: "images/напитки/питьевая вода bon aqua 0.5.png" },
         { id: 63, title: "Рич черный чай персик 0.5", cat: "napitki", price: 100, img: "images/напитки/rich черный чай персик 0.5.png" },
         { id: 64, title: "Рич зеленый чай манго 0.5", cat: "napitki", price: 100, img: "images/напитки/rich зеленый чай манго 0.5.png" },
         { id: 66, title: "Рич черный чай лимон 0.5", cat: "napitki", price: 100, img: "images/напитки/Рич черный чай лимон 0.5.png" },
