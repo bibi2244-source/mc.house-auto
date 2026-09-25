@@ -466,7 +466,7 @@
         .food-card {
             background: var(--card);
             padding: 10px 10px 0;
-            cursor: pointer;
+            cursor: default;
             transition: box-shadow 0.2s, transform 0.2s;
             position: relative;
             border-radius: 18px;
@@ -589,6 +589,11 @@
         }
 
         .choice-btn:hover { background: var(--red-dark); }
+
+        .choice-btn:active {
+            transform: scale(0.94);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.25);
+        }
 
         .wing-options {
             display: flex;
@@ -2114,7 +2119,7 @@
 
         menu[imageIndex].img = imagePathFix[currentImage] || currentImage;
 
-        menu[imageIndex].weight = "Порция";
+        menu[imageIndex].weight = "Цена";
         menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
     }
 
@@ -2515,17 +2520,17 @@
             var badgeClass = k.badge == "Новинка" ? "badge new" : "badge";
             var badgeHtml = k.badge ? '<div class="' + badgeClass + '">' + k.badge + '</div>' : '';
             var oldPriceHtml = k.oldPrice ? '<span class="old">' + k.oldPrice + ' ₽</span>' : '';
-            var cardActionHtml = k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? '<button class="choice-btn" onclick="otkrytBlyudo(' + k.id + ')">Выбрать</button>' : '';
+            var cardActionHtml = '<button class="choice-btn" onclick="otkrytBlyudo(' + k.id + ')">Подробнее</button>';
             var card = document.createElement("div");
             card.className = "food-card task";
             card.setAttribute("data-cat", k.cat);
             card.innerHTML =
-                '<div class="food-cover" onclick="otkrytBlyudo(' + k.id + ')">' +
+                '<div class="food-cover">' +
                     '<img src="' + k.img + '" alt="' + k.title + '" onerror="this.style.opacity=\'0\'">' +
                     badgeHtml +
                 '</div>' +
                 '<div class="food-card-body">' +
-                    '<h3 onclick="otkrytBlyudo(' + k.id + ')" style="cursor:pointer">' + k.title + '</h3>' +
+                    '<h3>' + k.title + '</h3>' +
                     '<div class="weight">' + k.weight + '</div>' +
                     '<div class="price-row">' +
                         '<div class="price">' + (k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
