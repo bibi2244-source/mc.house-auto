@@ -2022,12 +2022,12 @@
         { id: 59, title: "Цезарь с креветками", cat: "salaty", price: 269 },
     ];
 
-    var imageByTitle = {
+     var imageByTitle = {
         "макси тейсти": "images/макси тейсти.png",
         "мак люкс": "images/мак люкс.png",
         "двойной чизбургер": "images/двойной чизбургер.png",
         "чизбургер": "images/чизбургер.png",
-        "ВПН бургер": "images/ВПН бургер.png",
+        "впн бургер": "images/ВПН бургер.png",
         "блэк бургер": "images/блэк бургер.png",
         "криспи": "images/криспи.png",
         "чикен барбекю": "images/чикен барбекю.png",
@@ -2035,18 +2035,18 @@
         "чикен цезарь": "images/чикен цезарь.png",
         "наггер": "images/наггер.png",
         "чикенбургер": "images/чикенбургер.png",
-        "Пицца Ассорти большая": "images/ассорти.png",
-        "Пицца Куриная большая": "images/куриная.png",
-        "Пицца Мясная большая": "images/мясная.png",
-        "Пицца Грибная большая": "images/грибная.png",
-        "Пицца Пепперони большая": "images/пепперони.png",
-        "Пицца Маргарита большая": "images/маргарита.png",
-        "Пицца Цезарь большая": "images/цезарь пицца.png",
-        "Пицца 4 сыра большая": "images/4 сыра.png",
-        "Пицца Ассорти мини": "images/ассорти.png",
-        "Пицца Куриная мини": "images/куриная.png",
-        "Пицца Мясная мини": "images/мясная.png",
-        "Пицца Грибная мини": "images/грибная.png",
+        "пицца ассорти большая": "images/ассорти.png",
+        "пицца куриная большая": "images/куриная.png",
+        "пицца мясная большая": "images/мясная.png",
+        "пицца грибная большая": "images/грибная.png",
+        "пицца пепперони большая": "images/пепперони.png",
+        "пицца маргарита большая": "images/маргарита.png",
+        "пицца цезарь большая": "images/цезарь пицца.png",
+        "пицца 4 сыра большая": "images/4 сыра.png",
+        "пицца ассорти мини": "images/ассорти.png",
+        "пицца куриная мини": "images/куриная.png",
+        "пицца мясная мини": "images/мясная.png",
+        "пицца грибная мини": "images/грибная.png",
         "фри стандарт": "images/фри стандарт.png",
         "фри большая": "images/фри большая.png",
         "по-деревенски стандарт": "images/по-деревенски стандарт.png",
@@ -2066,13 +2066,15 @@
         "цезарь с креветками": "images/салат цезарь с креветками.png"
     };
 
-    for (var imageIndex = 0; imageIndex < menu.length; imageIndex++) {
+    
+
+     for (var imageIndex = 0; imageIndex < menu.length; imageIndex++) {
 
         var currentImage = menu[imageIndex].img ||
-            imageByTitle[menu[imageIndex].title] ||
-            "images/Макси Тейсти.png";
+            imageByTitle[menu[imageIndex].title.toLowerCase()] ||
+            "images/макси тейсти.png";
 
-        menu[imageIndex].img = imagePathFix[currentImage] || currentImage;
+        menu[imageIndex].img = currentImage;
 
         menu[imageIndex].weight = "Цена";
         menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
