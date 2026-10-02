@@ -1429,11 +1429,11 @@
             border: 1px solid var(--border);
             border-radius: 28px;
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
             width: 100%;
             max-width: 880px;
             height: auto;
-            min-height: 420px;
+            min-height: 0;
             max-height: 90vh;
             overflow: hidden;
             position: relative;
@@ -1445,7 +1445,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+            padding: 24px;
         }
 
         .eda-img-wrap img {
@@ -1456,7 +1456,7 @@
         }
 
         .eda-info-wrap {
-            padding: 40px 40px 40px 36px;
+            padding: 30px 32px 30px 28px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -1770,7 +1770,13 @@
 
             .eda-info-wrap { padding: 24px; }
 
-            .eda-desc { max-height: 160px; }
+            .eda-desc {
+                max-height: 160px;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .eda-desc::-webkit-scrollbar { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -2819,6 +2825,7 @@
             var k = massiv[i];
             var badgeClass = k.badge == "Новинка" ? "badge new" : "badge";
             var badgeHtml = k.badge ? '<div class="' + badgeClass + '">' + k.badge + '</div>' : '';
+            var weightLabelHtml = k.cat == "napitki" ? '' : '<div class="weight">Цена</div>';
             var oldPriceHtml = k.oldPrice ? '<span class="old">' + k.oldPrice + ' ₽</span>' : '';
             var cardActionHtml = '<button class="choice-btn" onclick="otkrytBlyudo(' + k.id + ')">Подробнее</button>';
             var card = document.createElement("div");
@@ -2831,7 +2838,7 @@
                 '</div>' +
                 '<div class="food-card-body">' +
                     '<h3>' + k.title + '</h3>' +
-                    '<div class="weight">Цена</div>' +
+                    weightLabelHtml +
                     '<div class="price-row">' +
                         '<div class="price">' + (k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
                         cardActionHtml +
@@ -2878,12 +2885,13 @@
         var oldPriceHtml = blyudo.oldPrice ? '<span style="font-size:16px;color:var(--muted);text-decoration:line-through;margin-left:10px;">' + blyudo.oldPrice + ' ₽</span>' : '';
         var badgeHtml = blyudo.badge ? '<span style="background:var(--red);color:white;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px;display:inline-block;">' + blyudo.badge + '</span><br>' : '';
         var kbzhuHtml = blyudo.kbzhu ? '<div class="eda-kbzhu">' + blyudo.kbzhu + '</div>' : '<div class="eda-kbzhu"></div>';
+        var weightHtml = blyudo.cat == "napitki" ? '' : '<div class="eda-weight">' + blyudo.weight + '</div>';
 
         document.getElementById("edaImg").src = blyudo.img;
         document.getElementById("edaInfo").innerHTML =
             badgeHtml +
             '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + blyudo.title + '</h2>' +
-            '<div class="eda-weight">' + blyudo.weight + '</div>' +
+            weightHtml +
             '<div class="eda-desc">' + blyudo.desc + '</div>' +
             kbzhuHtml +
             '<div class="eda-variants"></div>' +
