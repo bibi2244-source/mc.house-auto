@@ -610,15 +610,173 @@
             margin-bottom: 8px;
         }
 
-        .wing-option-select {
+        /* ── КАСТОМНЫЙ DROPDOWN ── */
+
+        .mc-dropdown {
+            position: relative;
             width: 100%;
-            background: var(--black);
-            border: 1px solid var(--border);
-            color: var(--white);
-            padding: 12px 14px;
+        }
+
+        .mc-dropdown-trigger {
+            width: 100%;
+            min-height: 46px;
+            padding: 12px 42px 12px 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+
+            color: #171512;
             font-family: 'Barlow', sans-serif;
             font-size: 14px;
+            font-weight: 400;
+
+            cursor: pointer;
+            text-align: left;
+
+            position: relative;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.15s ease;
+        }
+
+        .mc-dropdown-trigger:hover {
+            border-color: var(--red);
+            box-shadow: 0 4px 14px rgba(255, 30, 30, 0.08);
+        }
+
+        .mc-dropdown.open .mc-dropdown-trigger {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(255, 30, 30, 0.08);
+        }
+
+        /* стрелка */
+        .mc-dropdown-arrow {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+
+            width: 8px;
+            height: 8px;
+
+            border-right: 2px solid var(--red);
+            border-bottom: 2px solid var(--red);
+
+            transform: translateY(-65%) rotate(45deg);
+
+            transition: transform 0.2s ease;
+        }
+
+        .mc-dropdown.open .mc-dropdown-arrow {
+            transform: translateY(-25%) rotate(225deg);
+        }
+
+        /* выпадающее меню */
+        .mc-dropdown-menu {
+            position: absolute;
+
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+
+            background: #ffffff;
+
+            border: 1px solid #e3e3e3;
             border-radius: 10px;
+
+            padding: 5px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.12),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+
+            transition:
+                opacity 0.18s ease,
+                transform 0.18s ease,
+                visibility 0.18s ease;
+
+            z-index: 1000;
+
+            overflow: hidden;
+        }
+
+        .mc-dropdown.open .mc-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* пункт dropdown */
+        .mc-dropdown-option {
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: transparent;
+            color: #171512;
+
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                color 0.15s ease,
+                padding-left 0.15s ease;
+        }
+
+        .mc-dropdown-option:hover {
+            background: rgba(255, 30, 30, 0.07);
+            color: var(--red);
+            padding-left: 16px;
+        }
+
+        .mc-dropdown-option.active {
+            background: var(--red);
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .mc-dropdown-option.active:hover {
+            background: var(--red-dark);
+            color: #ffffff;
+        }
+
+        /* мобильная версия */
+        @media (max-width: 600px) {
+
+            .mc-dropdown-trigger {
+                min-height: 44px;
+                padding: 11px 40px 11px 14px;
+                font-size: 14px;
+            }
+
+            .mc-dropdown-option {
+                padding: 11px 12px;
+                font-size: 14px;
+            }
+
+            .mc-dropdown-menu {
+                max-height: 220px;
+                overflow-y: auto;
+            }
         }
 
         .wing-quantities {
@@ -1047,7 +1205,7 @@
         @media (max-width: 600px) {
 
             footer {
-                height: 300px;
+                height: 1px;
                 padding: 48px 20px 0;
             }
 
@@ -1073,7 +1231,7 @@
 
             .footer-logo {
                 font-size: clamp(125px, 31vw, 190px);
-                bottom: -15px;
+                bottom: -10px;
                 letter-spacing: -0.03em;
             }
         }
@@ -1269,30 +1427,95 @@
         .eda-box {
             background: var(--gray);
             border: 1px solid var(--border);
+            border-radius: 28px;
             display: grid;
-            grid-template-columns: 380px 1fr;
+            grid-template-columns: 400px 1fr;
             width: 100%;
-            max-width: 860px;
+            max-width: 880px;
+            height: auto;
+            min-height: 420px;
             max-height: 90vh;
             overflow: hidden;
             position: relative;
         }
 
-        .eda-img-wrap { overflow: hidden; }
+        .eda-img-wrap {
+            overflow: hidden;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
 
         .eda-img-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
         }
 
         .eda-info-wrap {
-            padding: 44px 40px;
+            padding: 40px 40px 40px 36px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-height: 0;
+        }
+
+        .eda-weight {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .eda-desc {
+            color: var(--white);
+            font-size: 14px;
+            line-height: 1.7;
+            flex: 0 1 auto;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 14px;
+            margin-bottom: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--muted) transparent;
+        }
+
+        .eda-desc::-webkit-scrollbar { width: 6px; }
+        .eda-desc::-webkit-scrollbar-track { background: transparent; }
+        .eda-desc::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 6px;
+        }
+        .eda-desc::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+        .eda-kbzhu {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .eda-kbzhu:empty { display: none; }
+
+        .eda-variants {
+            margin-bottom: 18px;
+        }
+
+        .eda-variants:empty { display: none; }
+
+        .eda-price-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .eda-price {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--white);
         }
 
         .eda-close {
@@ -1541,11 +1764,13 @@
 
             .eda-overlay { padding: 16px; }
 
-            .eda-box { grid-template-columns: 1fr; }
+            .eda-box { grid-template-columns: 1fr; height: auto; max-height: 94vh; border-radius: 20px; }
 
-            .eda-img-wrap { max-height: 240px; }
+            .eda-img-wrap { max-height: 220px; padding: 16px; }
 
             .eda-info-wrap { padding: 24px; }
+
+            .eda-desc { max-height: 160px; }
         }
 
         @media (max-width: 480px) {
@@ -1930,79 +2155,178 @@
 
 <script>
     var menu = [
-        { id: 1, title: "макси Тейсти", cat: "burgery", price: 299 },
-        { id: 2, title: "мак люкс", cat: "burgery", price: 259 },
-        { id: 3, title: "двойной чизбургер", cat: "burgery", price: 199 },
-        { id: 4, title: "чизбургер", cat: "burgery", price: 147 },
-        { id: 5, title: "впн бургер", cat: "burgery", price: 269 },
-        { id: 6, title: "блэк бургер", cat: "burgery", price: 289 },
-        { id: 7, title: "криспи", cat: "burgery", type: "option-group", price: 189, img: "images/криспи.png", options: [
-            { name: "оригинальный", price: 189, img: "images/криспи.png" },
-            { name: "острый", price: 189, img: "images/криспи острый.png" }
+        { id: 1, title: "макси Тейсти", cat: "burgery", price: 299,
+            weight: "298 г",
+            desc: "Тройной сыр, сочная говяжья котлета и дерзкий соус гриль на большой булочке с помидорами, капустой и луком — тест на максимальное удовольствие для тех, кто не привык останавливаться.",
+            kbzhu: "753 ккал / Б 36 / Ж 47 / У 45" },
+        { id: 2, title: "мак люкс", cat: "burgery", price: 259,
+            weight: "289 г",
+            desc: "Большая булочка, сочная говяжья котлета, сыр Чеддер, помидоры, пекинская капуста, огурчики и красный лук под нежным майонезом — полноценный обед для тех, кто привык брать от жизни максимум.",
+            kbzhu: "737 ккал / Б 30.6 / Ж 44.2 / У 44.8" },
+        { id: 3, title: "двойной чизбургер", cat: "burgery", price: 199,
+            weight: "246 г",
+            desc: "Две сочные говяжьи котлеты с расплавленным сыром Чеддер, пикантным томатно-горчичным соусом и хрустящими маринованными огурчиками на мягкой булочке — для тех, кто не привык выбирать между вкусным и сытным.",
+            kbzhu: "599 ккал / Б 38.5 / Ж 35.0 / У 28.9" },
+        { id: 4, title: "чизбургер", cat: "burgery", price: 147,
+            weight: "159 г",
+            desc: "Сочная говяжья котлета под расплавленным сыром Чеддер с пикантным соусом и хрустящими маринованными огурчиками на мягкой булочке — классика для тех, кто ценит проверенное удовольствие без лишних сложностей.",
+            kbzhu: "378 ккал / Б 21.7 / Ж 18.8 / У 28.7" },
+        { id: 5, title: "впн бургер", cat: "burgery", price: 269,
+            weight: "392 г",
+            desc: "Сочное куриное филе в панировке с помидорами, пекинской капустой, красным луком, сыром Чеддер и сырной балкой под соусом цезарь на булочке «Солнечная» — сытный обед без компромиссов.",
+            kbzhu: "882 ккал / Б 52.9 / Ж 42.1 / У 70.9" },
+        { id: 6, title: "блэк бургер", cat: "burgery", price: 289,
+            weight: "406 г",
+            desc: "Сочное куриное филе в панировке с помидорами, пекинской капустой и сыром Чеддер под томатно-майонезным соусом на чёрной булочке — сытный и дерзкий выбор для тех, кто не боится выделяться.",
+            kbzhu: "713 ккал / Б 59 / Ж 24 / У 66" },
+        { id: 7, title: "криспи", cat: "burgery", type: "option-group", price: 189, img: "images/криспи.png",
+            weight: "329 г",
+            kbzhu: "921 ккал / Б 47.7 / Ж 51.2 / У 68.3",
+            options: [
+            { name: "оригинальный", price: 189, img: "images/криспи.png",
+                desc: "Сочное куриное филе в золотистой панировке с пекинской капустой и нежным майонезом на мягкой булочке без кунжута — чистый вкус и хруст для тех, кто ценит простые идеальные сочетания." },
+            { name: "острый", price: 189, img: "images/криспи острый.png",
+                desc: "Острое куриное филе в хрустящей панировке с пекинской капустой и майонезом на мягкой булочке без кунжута — просто, хрустко и с риском привыкания." }
         ] },
-        { id: 8, title: "чикен барбекю", cat: "burgery", price: 189 },
-        { id: 9, title: "хот-дог", cat: "burgery", price: 139 },
+        { id: 8, title: "чикен барбекю", cat: "burgery", price: 189,
+            weight: "371 г",
+            desc: "Дымный барбекю, сочное куриное филе в хрустящей панировке, свежие овощи и сыр Чеддер на мягкой булочке без кунжута — вкус без тяжести.",
+            kbzhu: "560 ккал / Б 56.4 / Ж 10.6 / У 58.7" },
+        { id: 9, title: "хот-дог", cat: "burgery", price: 139,
+            weight: "180 г",
+            desc: "Сочная сосиска в мягкой булочке с хрустящей капустой, маринованными огурчиками и дуэтом томатного и горчичного соусов — быстрый и вкусный перекус без лишних церемоний.",
+            kbzhu: "381 ккал / Б 15.2 / Ж 19.6 / У 34.8" },
         { id: 10, title: "Крылышки", cat: "krylyshki", type: "wing-group", price: 247, img: "images/крылышки.png" },
         { id: 11, title: "Крылышки в соусе", cat: "krylyshki", type: "wing-group", price: 287, img: "images/крылышки в к-с соусе.png" },
-        { id: 18, title: "чикен цезарь", cat: "burgery", price: 159 },
-        { id: 19, title: "наггер", cat: "burgery", price: 149 },
-        { id: 20, title: "чикенбургер", cat: "burgery", price: 149 },
-        { id: 21, title: "пицца ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png", options: [{ name: "мини", price: 297 }, { name: "стандарт", price: 497 }] },
-        { id: 22, title: "пицца куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png", options: [{ name: "мини", price: 297 }, { name: "стандарт", price: 497 }] },
-        { id: 23, title: "пицца мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png", options: [{ name: "мини", price: 297 }, { name: "стандарт", price: 497 }] },
-        { id: 24, title: "пицца грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png", options: [{ name: "мини", price: 297 }, { name: "стандарт", price: 497 }] },
-        { id: 25, title: "пицца пепперони", cat: "pitstsa", price: 497, img: "images/пепперони.png" },
-        { id: 26, title: "пицца маргарита", cat: "pitstsa", price: 497, img: "images/маргарита.png" },
-        { id: 27, title: "пицца цезарь", cat: "pitstsa", price: 497, img: "images/цезарь пицца.png" },
-        { id: 28, title: "пицца 4 сыра", cat: "pitstsa", price: 497, img: "images/4 сыра.png" },
-        { id: 29, title: "Мак Комбо", cat: "kombo", price: 409, img: "images/мак комбо.png" },
-        { id: 34, title: "биг мастер", cat: "rolly", type: "option-group", price: 249, img: "images/биг мастер.png", options: [
-            { name: "оригинальный", price: 249, img: "images/биг мастер.png" },
-            { name: "острый", price: 249, img: "images/биг мастер острый.png" }
+        { id: 18, title: "чикен цезарь", cat: "burgery", price: 159,
+            weight: "185 г",
+            desc: "Три хрустящих наггетса с помидорами и пекинской капустой под соусом цезарь на мягкой булочке без кунжута — любимый салат в формате сытного бургера для тех, кто ценит классику и не прочь экспериментировать.",
+            kbzhu: "459 ккал / Б 19.6 / Ж 22.1 / У 45.0" },
+        { id: 19, title: "наггер", cat: "burgery", price: 149,
+            weight: "183 г",
+            desc: "Хот-дог с тремя куриными наггетсами, пекинской капустой, маринованными огурчиками и красным луком под томатным соусом и майонезом — дерзкий микс классики и новизны для любителей нестандартных сытных перекусов.",
+            kbzhu: "408.5 ккал / Б 15.2 / Ж 18.4 / У 43.6" },
+        { id: 20, title: "чикенбургер", cat: "burgery", price: 149,
+            weight: "165 г",
+            desc: "Три хрустящих куриных наггетса с пекинской капустой и нежным майонезом на мягкой булочке без кунжута — лёгкий перекус без тяжести для ценителей простых удовольствий.",
+            kbzhu: "505 ккал / Б 14.2 / Ж 34.1 / У 36.8" },
+        { id: 21, title: "пицца ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png",
+            desc: "Тонкое тесто с куриными байтсами, говяжьим фаршем, помидорами, грибами и маслинами под моцареллой и томатным соусом — для тех, кто хочет попробовать всё и сразу.",
+            options: [
+                { name: "мини", price: 297, weight: "450 г", kbzhu: "978 ккал / Б 43.9 / Ж 38.9 / У 111.9" },
+                { name: "стандарт", price: 497, weight: "665 г", kbzhu: "1381 ккал / Б 72.7 / Ж 58.1 / У 141.7" }
+            ] },
+        { id: 22, title: "пицца куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png",
+            desc: "Сытная пицца на тонком тесте с куриными байтсами, моцареллой и помидорами под томатным соусом — для тех, кто хочет вкусно и основательно подкрепиться.",
+            options: [
+                { name: "мини", price: 297, weight: "425 г", kbzhu: "829 ккал / Б 48.8 / Ж 30.1 / У 93.8" },
+                { name: "стандарт", price: 497, weight: "640 г", kbzhu: "1249 ккал / Б 73.5 / Ж 45.3 / У 141.3" }
+            ] },
+        { id: 23, title: "пицца мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png",
+            desc: "Сытная пицца на тонком тесте с говяжьим фаршем, моцареллой и помидорами под томатным соусом — праздник для тех, кто любит мясо и не признаёт полумер.",
+            options: [
+                { name: "мини", price: 297, weight: "425 г", kbzhu: "854 ккал / Б 42.1 / Ж 39.1 / У 91.5" },
+                { name: "стандарт", price: 497, weight: "640 г", kbzhu: "1313 ккал / Б 66.9 / Ж 62.2 / У 132.3" }
+            ] },
+        { id: 24, title: "пицца грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png",
+            desc: "Тонкое тесто с шампиньонами и моцареллой под томатным соусом — благородная простота для любителей грибов.",
+            options: [
+                { name: "мини", price: 297, weight: "395 г", kbzhu: "835 ккал / Б 39.8 / Ж 25.2 / У 116.3" },
+                { name: "стандарт", price: 497, weight: "610 г", kbzhu: "1129 ккал / Б 54.1 / Ж 46.1 / У 123.4" }
+            ] },
+        { id: 25, title: "пицца пепперони", cat: "pitstsa", price: 497, img: "images/пепперони.png",
+            weight: "610 г",
+            desc: "Тонкое тесто с нежной моцареллой и пикантной пепперони под томатным соусом — огненная классика для тех, кто любит, когда пицца бьёт точно в цель.",
+            kbzhu: "1520 ккал / Б 63.5 / Ж 79.8 / У 129.5" },
+        { id: 26, title: "пицца маргарита", cat: "pitstsa", price: 497, img: "images/маргарита.png",
+            weight: "580 г",
+            desc: "Вечная классика на тонком тесте с нежной моцареллой, сочными помидорами и ароматным томатным соусом — настоящий итальянский вкус без лишних деталей.",
+            kbzhu: "1127 ккал / Б 51.8 / Ж 45.5 / У 127.5" },
+        { id: 27, title: "пицца цезарь", cat: "pitstsa", price: 497, img: "images/цезарь пицца.png",
+            weight: "685 г",
+            desc: "Пицца с куриными байтсами, моцареллой, помидорами, пекинской капустой и маслинами под соусом цезарь и майонезом — любимый салат в новом прочтении.",
+            kbzhu: "1481 ккал / Б 83.4 / Ж 77.1 / У 116.2" },
+        { id: 28, title: "пицца 4 сыра", cat: "pitstsa", price: 497, img: "images/4 сыра.png",
+            weight: "583 г",
+            desc: "Тонкое тесто с нежной моцареллой, сливочным Эмменталлером и пикантным Чеддером под фирменным соусом цезарь — сырная гармония для тех, кто любит сыр во всех его проявлениях.",
+            kbzhu: "1470 ккал / Б 71.4 / Ж 83.3 / У 112.8" },
+        { id: 29, title: "Мак Комбо", cat: "kombo", price: 409, img: "images/мак комбо.png",
+            weight: "456 г",
+            desc: "Большой бургер с сочной говяжьей котлетой, тройным сыром Чеддер, помидорами и пекинской капустой под соусом гриль плюс золотистый картофель фри с приправой — сытный обед для тех, кто не привык выбирать между бургером и фри.",
+            kbzhu: "1330 ккал / Б 44.4 / Ж 72.0 / У 122.7" },
+        { id: 34, title: "биг мастер", cat: "rolly", type: "option-group", price: 249, img: "images/биг мастер.png",
+            weight: "444 г",
+            kbzhu: "913 ккал / Б 58.7 / Ж 38.8 / У 75.6",
+            options: [
+            { name: "оригинальный", price: 249, img: "images/биг мастер.png",
+                desc: "Сочное куриное филе в панировке с хешбрауном, сыром Чеддер, помидорами и пекинской капустой под майонезом в тонком лаваше — большой и сытный ролл для тех, кто выбирает максимум удовольствия." },
+            { name: "острый", price: 249, img: "images/биг мастер острый.png",
+                desc: "Сочное куриное филе в острой панировке с хешбрауном, сыром Чеддер, помидорами и пекинской капустой под майонезом в тонком лаваше — большой и сытный ролл с огоньком для тех, кто не боится экспериментировать." }
         ] },
-        { id: 35, title: "лестер", cat: "rolly", type: "option-group", price: 179, img: "images/лестер.png", options: [
-            { name: "оригинальный", price: 179, img: "images/лестер.png" },
-            { name: "острый", price: 179, img: "images/лестер острый.png" }
+        { id: 35, title: "лестер", cat: "rolly", type: "option-group", price: 179, img: "images/лестер.png",
+            weight: "278 г",
+            kbzhu: "760 ккал / Б 30 / Ж 38 / У 68",
+            options: [
+            { name: "оригинальный", price: 179, img: "images/лестер.png",
+                desc: "Золотистые куриные стрипсы в хрустящей панировке с помидорами и пекинской капустой под нежным майонезом в тонком лаваше — сытный перекус без лишних церемоний." },
+            { name: "острый", price: 179, img: "images/лестер острый.png",
+                desc: "Хрустящие куриные стрипсы в острой панировке с помидорами и пекинской капустой под нежным майонезом в тонком лаваше — привычный сытный ролл, но с характером." }
         ] },
-        { id: 37, title: "шримп ролл", cat: "rolly", price: 239, img: "images/шримп ролл.png" },
-        { id: 38, title: "биф ролл", cat: "rolly", price: 199, img: "images/биф ролл.png" },
-        { id: 48, title: "картофель фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png", options: [
-            { name: "стандарт", price: 149, img: "images/фри стандарт.png" },
-            { name: "большая", price: 189, img: "images/фри большая.png" }
+        { id: 37, title: "шримп ролл", cat: "rolly", price: 239, img: "images/шримп ролл.png",
+            weight: "181 г",
+            desc: "Сочные креветки с хрустящей пекинской капустой и нежным соусом тар-тар в тонком лаваше — лёгкий вкус моря без лишних хлопот.",
+            kbzhu: "430 ккал / Б 18.2 / Ж 20.1 / У 38.5" },
+        { id: 38, title: "биф ролл", cat: "rolly", price: 199, img: "images/биф ролл.png",
+            weight: "256 г",
+            desc: "Сочная говяжья котлета с помидорами, пекинской капустой, маринованными огурчиками и красным луком под майонезом и томатной пастой в тонком лаваше — полноценный обед для тех, кто ценит время, но не готов отказываться от вкуса.",
+            kbzhu: "589 ккал / Б 26.3 / Ж 33.3 / У 40.6" },
+        { id: 48, title: "картофель фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png",
+            desc: "Золотистый хрустящий картофель фри с фирменной приправой — идеальный гарнир или самостоятельная закуска для тех, кто ценит проверенную классику.",
+            options: [
+            { name: "стандарт", price: 149, img: "images/фри стандарт.png", weight: "140 г", kbzhu: "431 ккал / Б 5.2 / Ж 20.7 / У 56.6" },
+            { name: "большая", price: 189, img: "images/фри большая.png", weight: "230 г", kbzhu: "711 ккал / Б 8.7 / Ж 34.2 / У 93.5" }
         ] },
-        { id: 49, title: "картофель по-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png", options: [
-            { name: "стандарт", price: 159, img: "images/по-деревенски стандарт.png" },
-            { name: "большая", price: 219, img: "images/по-деревенски большая.png" }
+        { id: 49, title: "картофель по-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png",
+            desc: "Хрустящие снаружи и мягкие внутри дольки картофеля с пряными специями — идеальный гарнир или закуска для ценителей деревенского вкуса.",
+            options: [
+            { name: "стандарт", price: 159, img: "images/по-деревенски стандарт.png", weight: "225 г", kbzhu: "338 ккал / Б 5.6 / Ж 12.4 / У 51.8" },
+            { name: "большая", price: 219, img: "images/по-деревенски большая.png", weight: "290 г", kbzhu: "436 ккал / Б 7.2 / Ж 16.0 / У 66.8" }
         ] },
         { id: 39, title: "стрипсы", cat: "stripsy", type: "variant-quantity-group", price: 147, img: "images/стрипсы.png", variants: [
-            { name: "оригинальные", img: "images/стрипсы.png" },
-            { name: "острые", img: "images/стрипсы острые.png" }
+            { name: "оригинальные", img: "images/стрипсы.png", desc: "Хрустящие куриные стрипсы — идеальный перекус для любителей хруста." },
+            { name: "острые", img: "images/стрипсы острые.png", desc: "Острые хрустящие куриные стрипсы — перекус с огоньком." }
         ], quantities: [
-            { name: "2 шт", price: 147 },
-            { name: "5 шт", price: 277 },
-            { name: "7 шт", price: 367 }
+            { name: "2 шт", price: 147, weight: "142 г", kbzhu: "399 ккал / Б 22.7 / Ж 19.3 / У 33.5" },
+            { name: "5 шт", price: 277, weight: "355 г", kbzhu: "998 ккал / Б 56.8 / Ж 48.3 / У 83.8" },
+            { name: "7 шт", price: 367, weight: "497 г", kbzhu: "1397 ккал / Б 79.5 / Ж 67.6 / У 117.3" }
         ] },
         { id: 52, title: "наггетсы", cat: "zakuski", type: "variant-quantity-group", price: 147, img: "images/наггетсы.png", variants: [
-            { name: "классические", img: "images/наггетсы.png" }
+            { name: "классические", img: "images/наггетсы.png", desc: "Золотистые куриные наггетсы с хрустящей корочкой и нежным мясом — классика для детей и взрослых, пять штук для лёгкого перекуса." }
         ], quantities: [
-            { name: "5 шт", price: 147 },
-            { name: "9 шт", price: 227 },
-            { name: "16 шт", price: 327 }
+            { name: "5 шт", price: 147, weight: "105 г", kbzhu: "242 ккал / Б 14.7 / Ж 14.7 / У 13.7" },
+            { name: "9 шт", price: 227, weight: "190 г", kbzhu: "436 ккал / Б 26.5 / Ж 26.5 / У 24.7" },
+            { name: "16 шт", price: 327, weight: "335 г", kbzhu: "774 ккал / Б 47.0 / Ж 47.0 / У 43.8" }
         ] },
         { id: 44, title: "байтсы", cat: "baytsy", type: "option-group", price: 299, img: "images/байтсы классические.png", options: [
-            { name: "классические", price: 299, img: "images/байтсы классические.png" },
-            { name: "в кисло-сладком соусе", price: 327, img: "images/байтсы в кисло-сладком соусе.png" },
-            { name: "в остром соусе", price: 327, img: "images/байтсы в остром соусе.png" }
+            { name: "классические", price: 299, img: "images/байтсы классические.png",
+                desc: "Хрустящие куриные байтсы — идеальный перекус для любителей хруста.",
+                weight: "315 г", kbzhu: "886 ккал / Б 50.4 / Ж 42.9 / У 74.4" },
+            { name: "в кисло-сладком соусе", price: 327, img: "images/байтсы в кисло-сладком соусе.png",
+                desc: "Хрустящие куриные байтсы в кисло-сладком соусе — перекус с ярким вкусом.",
+                weight: "355 г", kbzhu: "947 ккал / Б 41.9 / Ж 33.9 / У 120" },
+            { name: "в остром соусе", price: 327, img: "images/байтсы в остром соусе.png",
+                desc: "Хрустящие куриные байтсы в остром соусе — перекус с огоньком.",
+                weight: "355 г", kbzhu: "940 ккал / Б 50.6 / Ж 43.1 / У 78.0" }
         ] },
         { id: 55, title: "креветки", cat: "zakuski", type: "variant-quantity-group", price: 299, img: "images/креветки.png", variants: [
-            { name: "классические", img: "images/креветки.png" }
+            { name: "классические", img: "images/креветки.png", desc: "Хрустящие креветки в золотистой панировке с нежным мясом внутри — идеальная закуска для любителей морепродуктов." }
         ], quantities: [
-            { name: "5 шт", price: 299 }
+            { name: "5 шт", price: 299, weight: "155 г", kbzhu: "341 ккал / Б 23.3 / Ж 18.6 / У 23.3" }
         ] },
         { id: 56, title: "сырные палочки", cat: "zakuski", type: "variant-quantity-group", price: 229, img: "images/сырные палочки.png", variants: [
-            { name: "классические", img: "images/сырные палочки.png" }
+            { name: "классические", img: "images/сырные палочки.png", desc: "Хрустящие снаружи и тянущиеся внутри сырные палочки в золотистой панировке — идеальная закуска для компании." }
         ], quantities: [
-            { name: "6 шт", price: 229 }
+            { name: "6 шт", price: 229, weight: "162 г", kbzhu: "486 ккал / Б 21.1 / Ж 29.2 / У 35.6" }
         ] },
         { id: 60, title: "Добрый кола", cat: "napitki", type: "option-group", price: 100, img: "images/напитки/Добрый кола 0.4.png", options: [
             { name: "0.4 л", price: 100, img: "images/напитки/Добрый кола 0.4.png" },
@@ -2014,13 +2338,34 @@
         { id: 66, title: "Рич черный чай лимон 0.5", cat: "napitki", price: 100, img: "images/напитки/Рич черный чай лимон 0.5.png" },
         { id: 67, title: "Добрый кола стекло 0.33", cat: "napitki", price: 120, img: "images/напитки/Добрый кола стекло 0.33.png" },
         { id: 65, title: "Добрый кола ж/б 0.33", cat: "napitki", price: 100, img: "images/напитки/Добрый кола жб 0.33.png" },
-        { id: 70, title: "Сырный соус", cat: "sousy", price: 40, img: "images/Сырный.png" },
-        { id: 71, title: "Томатный соус", cat: "sousy", price: 40, img: "images/Томатный.png" },
-        { id: 72, title: "Кисло-сладкий соус", cat: "sousy", price: 40, img: "images/Кисло-сладкий.png" },
-        { id: 73, title: "Барбекю соус", cat: "sousy", price: 40, img: "images/Барбекю.png" },
-        { id: 74, title: "Чесночный соус", cat: "sousy", price: 40, img: "images/Чесночный.png" },
-        { id: 58, title: "Цезарь с курицей", cat: "salaty", price: 197 },
-        { id: 59, title: "Цезарь с креветками", cat: "salaty", price: 269 },
+        { id: 70, title: "Сырный соус", cat: "sousy", price: 40, img: "images/Сырный.png",
+            weight: "30 г",
+            desc: "Нежный сырный соус — идеальное дополнение к любому блюду.",
+            kbzhu: "120 ккал / Б 3.0 / Ж 11.0 / У 3.0" },
+        { id: 71, title: "Томатный соус", cat: "sousy", price: 40, img: "images/Томатный.png",
+            weight: "30 г",
+            desc: "Классический томатный соус с ярким вкусом.",
+            kbzhu: "30 ккал / Б 0.5 / Ж 0.0 / У 7.0" },
+        { id: 72, title: "Кисло-сладкий соус", cat: "sousy", price: 40, img: "images/Кисло-сладкий.png",
+            weight: "30 г",
+            desc: "Кисло-сладкий соус — баланс сладости и кислинки.",
+            kbzhu: "45 ккал / Б 0.3 / Ж 0.2 / У 11.0" },
+        { id: 73, title: "Барбекю соус", cat: "sousy", price: 40, img: "images/Барбекю.png",
+            weight: "30 г",
+            desc: "Дымный соус барбекю для любителей пикантного.",
+            kbzhu: "45 ккал / Б 0.5 / Ж 0.5 / У 10.0" },
+        { id: 74, title: "Чесночный соус", cat: "sousy", price: 40, img: "images/Чесночный.png",
+            weight: "30 г",
+            desc: "Ароматный чесночный соус для яркого вкуса.",
+            kbzhu: "105 ккал / Б 2.0 / Ж 10.0 / У 3.0" },
+        { id: 58, title: "Цезарь с курицей", cat: "salaty", price: 197,
+            weight: "240 г",
+            desc: "Хрустящая пекинская капуста, помидоры, огурцы, моцарелла, сухарики и куриные стрипсы под майонезом — свежий и сытный перекус.",
+            kbzhu: "572 ккал / Б 19.1 / Ж 46.5 / У 27.2" },
+        { id: 59, title: "Цезарь с креветками", cat: "salaty", price: 269,
+            weight: "233 г",
+            desc: "Морская версия Цезаря с креветками, пекинской капустой, огурцами, помидорами, моцареллой и сухариками под майонезом — лёгкий и изысканный выбор для нового прочтения знакомого салата.",
+            kbzhu: "437 ккал / Б 15.7 / Ж 36.1 / У 11.1" },
     ];
 
      var imageByTitle = {
@@ -2077,8 +2422,9 @@
 
         menu[imageIndex].img = currentImage;
 
-        menu[imageIndex].weight = "Цена";
-        menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
+        if (!menu[imageIndex].weight) menu[imageIndex].weight = "Цена";
+        if (!menu[imageIndex].desc) menu[imageIndex].desc = "Позиция меню MC.HOUSE. Актуальная цена указана на сайте.";
+        if (!menu[imageIndex].kbzhu) menu[imageIndex].kbzhu = "";
     }
 
     var tekushijFiltr = "burgeryrolly";
@@ -2371,24 +2717,17 @@
          /* НАПИТКИ */
         if (getRazdelTovara(k) == "napitki") {
 
-            var title = k.title;
+            var title = k.title.toLowerCase();
 
-            if (
-                title == "Добрый Cola 0.4" ||
-                title == "Добрый Cola 0.5" ||
-                title == "Добрый Cola ж/б 0.33"
-            ) {
+            if (title.indexOf("добрый кола") != -1) {
                 return "holodnye";
             }
 
-            if (
-                title == "Rich черный чай персик 0.5" ||
-                title == "Rich зеленый чай манго 0.5"
-            ) {
+            if (title.indexOf("рич") != -1) {
                 return "soki";
             }
 
-            if (title == "Питьевая вода Bon Aqua 0.5") {
+            if (title.indexOf("бон аква") != -1) {
                 return "voda";
             }
 
@@ -2492,7 +2831,7 @@
                 '</div>' +
                 '<div class="food-card-body">' +
                     '<h3>' + k.title + '</h3>' +
-                    '<div class="weight">' + k.weight + '</div>' +
+                    '<div class="weight">Цена</div>' +
                     '<div class="price-row">' +
                         '<div class="price">' + (k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
                         cardActionHtml +
@@ -2538,16 +2877,18 @@
 
         var oldPriceHtml = blyudo.oldPrice ? '<span style="font-size:16px;color:var(--muted);text-decoration:line-through;margin-left:10px;">' + blyudo.oldPrice + ' ₽</span>' : '';
         var badgeHtml = blyudo.badge ? '<span style="background:var(--red);color:white;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px;display:inline-block;">' + blyudo.badge + '</span><br>' : '';
+        var kbzhuHtml = blyudo.kbzhu ? '<div class="eda-kbzhu">' + blyudo.kbzhu + '</div>' : '<div class="eda-kbzhu"></div>';
 
         document.getElementById("edaImg").src = blyudo.img;
         document.getElementById("edaInfo").innerHTML =
             badgeHtml +
-            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(blyudo.cat) + '</div>' +
-            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + blyudo.title + '</h2>' +
-            '<div style="font-size:12px;color:var(--muted);margin-bottom:20px;">' + blyudo.weight + '</div>' +
-            '<div style="font-size:14px;color:var(--white);line-height:1.8;margin-bottom:28px;opacity:0.8;">' + blyudo.desc + '</div>' +
-            '<div style="display:flex;align-items:center;gap:10px;">' +
-                '<span style="font-family:Barlow Condensed,sans-serif;font-size:40px;font-weight:900;">' + blyudo.price + ' ₽</span>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + blyudo.title + '</h2>' +
+            '<div class="eda-weight">' + blyudo.weight + '</div>' +
+            '<div class="eda-desc">' + blyudo.desc + '</div>' +
+            kbzhuHtml +
+            '<div class="eda-variants"></div>' +
+            '<div class="eda-price-row">' +
+                '<span class="eda-price">' + blyudo.price + ' ₽</span>' +
                 oldPriceHtml +
             '</div>';
 
@@ -2561,46 +2902,192 @@
     function getWingVariants(product) {
         if (product.id == 10) {
             return [
-                { name: "Оригинальные", img: "images/крылышки.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 } },
-                { name: "Острые", img: "images/крылышки острые.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 } }
+                { name: "Оригинальные", img: "images/крылышки.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 },
+                    desc: "Золотистые хрустящие куриные крылышки с пряным вкусом — идеальная закуска для компании или дополнение к основному блюду.",
+                    weights: { 5: "255 г", 8: "408 г", 16: "816 г", 25: "1275 г" },
+                    kbzhu: {
+                        5: "584 ккал / Б 41.8 / Ж 29.7 / У 38.8",
+                        8: "934.4 ккал / Б 66.9 / Ж 47.5 / У 62.1",
+                        16: "1868.8 ккал / Б 133.8 / Ж 95.0 / У 124.2",
+                        25: "2920 ккал / Б 209.0 / Ж 148.5 / У 194.0"
+                    } },
+                { name: "Острые", img: "images/крылышки острые.png", prices: { 5: 247, 8: 387, 16: 699, 25: 979 },
+                    desc: "Острые куриные крылышки в хрустящей панировке — сочные и с огоньком для тех, кто любит поострее, идеальная закуска для компании или дополнение к основному блюду.",
+                    weights: { 5: "255 г", 8: "408 г", 16: "816 г", 25: "1275 г" },
+                    kbzhu: {
+                        5: "584 ккал / Б 41.8 / Ж 29.7 / У 38.8",
+                        8: "934.4 ккал / Б 66.9 / Ж 47.5 / У 62.1",
+                        16: "1868.8 ккал / Б 133.8 / Ж 95.0 / У 124.2",
+                        25: "2920 ккал / Б 209.0 / Ж 148.5 / У 194.0"
+                    } }
             ];
         }
         return [
-            { name: "Кисло-сладкий соус", img: "images/крылышки в к-с соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 } },
-            { name: "Острый соус", img: "images/крылышки в остром соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 } }
+            { name: "Кисло-сладкий соус", img: "images/крылышки в к-с соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 },
+                desc: "Золотистые куриные крылышки в хрустящей панировке под кисло-сладким соусом — идеальная закуска для тех, кто любит баланс хруста, сочности и яркого вкуса.",
+                weights: { 5: "330 г", 8: "528 г", 16: "1056 г", 25: "1650 г" },
+                kbzhu: {
+                    5: "704 ккал / Б 42.2 / Ж 29.9 / У 68.8",
+                    8: "1126.4 ккал / Б 67.5 / Ж 47.7 / У 110.1",
+                    16: "2252.8 ккал / Б 135.0 / Ж 95.6 / У 220.2",
+                    25: "3520 ккал / Б 210.9 / Ж 149.3 / У 344.0"
+                } },
+            { name: "Острый соус", img: "images/крылышки в остром соусе.png", prices: { 5: 287, 8: 419, 16: 749, 25: 999 },
+                desc: "Золотистые куриные крылышки в хрустящей панировке под острым соусом — идеальная закуска для тех, кто любит поострее.",
+                weights: { 5: "330 г", 8: "528 г", 16: "1056 г", 25: "1650 г" },
+                kbzhu: {
+                    5: "704 ккал / Б 42.2 / Ж 29.9 / У 68.8",
+                    8: "1126.4 ккал / Б 67.5 / Ж 47.8 / У 110.1",
+                    16: "2252.8 ккал / Б 135.0 / Ж 95.6 / У 220.2",
+                    25: "3520 ккал / Б 210.9 / Ж 149.3 / У 344.0"
+                } }
         ];
     }
 
+    /* ── КАСТОМНЫЙ DROPDOWN ── */
+
+    function createCustomDropdown(id, options, selectedIndex, callbackName) {
+        var selected = options[selectedIndex] || options[0];
+
+        var html =
+            '<div class="mc-dropdown" id="' + id + '">' +
+
+                '<button type="button" class="mc-dropdown-trigger" ' +
+                    'onclick="toggleCustomDropdown(\'' + id + '\')">' +
+
+                    '<span class="mc-dropdown-value">' +
+                        selected.name +
+                    '</span>' +
+
+                    '<span class="mc-dropdown-arrow"></span>' +
+
+                '</button>' +
+
+                '<div class="mc-dropdown-menu">';
+
+        for (var i = 0; i < options.length; i++) {
+
+            html +=
+                '<button type="button" ' +
+                    'class="mc-dropdown-option' +
+                    (i === selectedIndex ? ' active' : '') +
+                    '" ' +
+                    'onclick="' +
+                        callbackName +
+                        '(' + i + '); closeCustomDropdowns();' +
+                    '">' +
+
+                    options[i].name +
+
+                '</button>';
+        }
+
+        html +=
+                '</div>' +
+            '</div>';
+
+        return html;
+    }
+
+
+    function toggleCustomDropdown(id) {
+
+        var dropdown = document.getElementById(id);
+
+        if (!dropdown) return;
+
+        var isOpen = dropdown.classList.contains('open');
+
+        closeCustomDropdowns();
+
+        if (!isOpen) {
+            dropdown.classList.add('open');
+        }
+    }
+
+
+    function closeCustomDropdowns() {
+
+        var dropdowns =
+            document.querySelectorAll('.mc-dropdown');
+
+        for (var i = 0; i < dropdowns.length; i++) {
+            dropdowns[i].classList.remove('open');
+        }
+    }
+
+
+    /* обновляет отображаемое значение и активный пункт dropdown после выбора */
+
+    function updateCustomDropdown(id, options, selectedIndex) {
+
+        var dropdown = document.getElementById(id);
+
+        if (!dropdown) return;
+
+        var valueEl = dropdown.querySelector('.mc-dropdown-value');
+
+        if (valueEl) {
+            valueEl.innerText = options[selectedIndex].name;
+        }
+
+        var optionEls = dropdown.querySelectorAll('.mc-dropdown-option');
+
+        for (var i = 0; i < optionEls.length; i++) {
+            optionEls[i].classList.toggle('active', i == selectedIndex);
+        }
+    }
+
+
+    /* закрываем dropdown при клике вне него */
+
+    document.addEventListener('click', function(event) {
+
+        if (!event.target.closest('.mc-dropdown')) {
+            closeCustomDropdowns();
+        }
+
+    });
+    
     function renderWingModal(product) {
         activeWingProduct = product;
         activeWingVariant = 0;
         activeWingQuantity = 5;
         var variants = getWingVariants(product);
-        var optionsHtml = "";
-        for (var i = 0; i < variants.length; i++) {
-            optionsHtml += '<option value="' + i + '">' + variants[i].name + '</option>';
-        }
+        var variant = variants[0];
 
-        document.getElementById("edaImg").src = variants[0].img;
+        document.getElementById("edaImg").src = variant.img;
         document.getElementById("edaInfo").innerHTML =
-            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">Крылышки</div>' +
-            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
-            '<div class="wing-options">' +
-                '<div><label class="wing-option-label" for="wingVariant">Вариант</label><select class="wing-option-select" id="wingVariant" onchange="chooseWingVariant(this.value)">' + optionsHtml + '</select></div>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + product.title + '</h2>' +
+            '<div class="eda-weight" id="wingWeight">' + variant.weights[5] + '</div>' +
+            '<div class="eda-desc" id="wingDesc">' + variant.desc + '</div>' +
+            '<div class="eda-kbzhu" id="wingKbzhu">' + variant.kbzhu[5] + '</div>' +
+            '<div class="eda-variants wing-options">' +
+                '<div>' +
+                    createCustomDropdown(
+                        'wingVariant',
+                        variants,
+                        0,
+                        'chooseWingVariant'
+                    ) +
+                '</div>' +
                 '<div><span class="wing-option-label">Количество</span><div class="wing-quantities">' +
                     '<button class="wing-quantity active" onclick="chooseWingQuantity(5)">5 шт</button>' +
                     '<button class="wing-quantity" onclick="chooseWingQuantity(8)">8 шт</button>' +
                     '<button class="wing-quantity" onclick="chooseWingQuantity(16)">16 шт</button>' +
                     '<button class="wing-quantity" onclick="chooseWingQuantity(25)">25 шт</button>' +
                 '</div></div>' +
-                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="wingCurrentPrice">' + variants[0].prices[5] + ' ₽</div></div>' +
-            '</div>';
+            '</div>' +
+            '<div class="eda-price-row"><span class="eda-price" id="wingCurrentPrice">' + variant.prices[5] + ' ₽</span></div>';
     }
 
     function chooseWingVariant(value) {
         activeWingVariant = Number(value);
-        var variant = getWingVariants(activeWingProduct)[activeWingVariant];
+        var variants = getWingVariants(activeWingProduct);
+        var variant = variants[activeWingVariant];
         document.getElementById("edaImg").src = variant.img;
+        document.getElementById("wingDesc").innerText = variant.desc;
+        updateCustomDropdown('wingVariant', variants, activeWingVariant);
         updateWingPrice();
     }
 
@@ -2616,6 +3103,8 @@
     function updateWingPrice() {
         var variant = getWingVariants(activeWingProduct)[activeWingVariant];
         document.getElementById("wingCurrentPrice").innerText = variant.prices[activeWingQuantity] + " ₽";
+        document.getElementById("wingWeight").innerText = variant.weights[activeWingQuantity];
+        document.getElementById("wingKbzhu").innerText = variant.kbzhu[activeWingQuantity];
     }
 
     var activeOptionProduct = null;
@@ -2624,19 +3113,23 @@
     function renderOptionModal(product) {
         activeOptionProduct = product;
         activeOptionIndex = 0;
-        var optionsHtml = "";
-        for (var i = 0; i < product.options.length; i++) {
-            optionsHtml += '<option value="' + i + '">' + product.options[i].name + '</option>';
-        }
+        var option0 = product.options[0];
 
-        document.getElementById("edaImg").src = product.options[0].img || product.img;
+        document.getElementById("edaImg").src = option0.img || product.img;
         document.getElementById("edaInfo").innerHTML =
-            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(product.cat) + '</div>' +
-            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
-            '<div class="wing-options">' +
-                '<div><label class="wing-option-label" for="productOption">Вариант</label><select class="wing-option-select" id="productOption" onchange="chooseProductOption(this.value)">' + optionsHtml + '</select></div>' +
-                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="productCurrentPrice">' + product.options[0].price + ' ₽</div></div>' +
-            '</div>';
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + product.title + '</h2>' +
+            '<div class="eda-weight" id="productOptionWeight">' + (option0.weight || product.weight || '') + '</div>' +
+            '<div class="eda-desc" id="productOptionDesc">' + (option0.desc || product.desc || '') + '</div>' +
+            '<div class="eda-kbzhu" id="productOptionKbzhu">' + (option0.kbzhu || product.kbzhu || '') + '</div>' +
+            '<div class="eda-variants">' +
+                createCustomDropdown(
+                    'productOption',
+                    product.options,
+                    0,
+                    'chooseProductOption'
+                ) +
+            '</div>' +
+            '<div class="eda-price-row"><span class="eda-price" id="productCurrentPrice">' + option0.price + ' ₽</span></div>';
     }
 
     function chooseProductOption(value) {
@@ -2644,6 +3137,13 @@
         var option = activeOptionProduct.options[activeOptionIndex];
         document.getElementById("edaImg").src = option.img || activeOptionProduct.img;
         document.getElementById("productCurrentPrice").innerText = option.price + " ₽";
+        var weightEl = document.getElementById("productOptionWeight");
+        if (weightEl) weightEl.innerText = option.weight || activeOptionProduct.weight || "";
+        var descEl = document.getElementById("productOptionDesc");
+        if (descEl) descEl.innerText = option.desc || activeOptionProduct.desc || "";
+        var kbzhuEl = document.getElementById("productOptionKbzhu");
+        if (kbzhuEl) kbzhuEl.innerText = option.kbzhu || activeOptionProduct.kbzhu || "";
+        updateCustomDropdown('productOption', activeOptionProduct.options, activeOptionIndex);
     }
 
     var activeVariantQuantityProduct = null;
@@ -2654,43 +3154,58 @@
         activeVariantQuantityProduct = product;
         activeVariantIndex = 0;
         activeQuantityIndex = 0;
-        var variantHtml = "";
         var quantityHtml = "";
         var showVariantSelector = product.variants && product.variants.length > 1;
+        var variant0 = product.variants[0];
+        var quantity0 = product.quantities[0];
 
-        for (var i = 0; i < product.variants.length; i++) {
-            variantHtml += '<option value="' + i + '">' + product.variants[i].name + '</option>';
-        }
         for (var j = 0; j < product.quantities.length; j++) {
             quantityHtml += '<button class="wing-quantity' + (j == 0 ? ' active' : '') + '" type="button" onclick="chooseVariantQuantityAmount(' + j + ')">' + product.quantities[j].name + '</button>';
         }
 
-        document.getElementById("edaImg").src = product.variants[0].img;
+        document.getElementById("edaImg").src = variant0.img;
         document.getElementById("edaInfo").innerHTML =
-            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">' + catLabel(product.cat) + '</div>' +
-            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">' + product.title + '</h2>' +
-            '<div class="wing-options">' +
-                (showVariantSelector ? '<div><label class="wing-option-label" for="stripVariant">Вариант</label><select class="wing-option-select" id="stripVariant" onchange="chooseVariantQuantityVariant(this.value)">' + variantHtml + '</select></div>' : '') +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + product.title + '</h2>' +
+            '<div class="eda-weight" id="vqWeight">' + (quantity0.weight || '') + '</div>' +
+            '<div class="eda-desc" id="vqDesc">' + (variant0.desc || product.desc || '') + '</div>' +
+            '<div class="eda-kbzhu" id="vqKbzhu">' + (quantity0.kbzhu || '') + '</div>' +
+            '<div class="eda-variants wing-options">' +
+                (showVariantSelector ?
+                    '<div>' +
+                        createCustomDropdown(
+                            'stripVariant',
+                            product.variants,
+                            0,
+                            'chooseVariantQuantityVariant'
+                        ) +
+                    '</div>'
+                : '') +
                 '<div><span class="wing-option-label">Количество</span><div class="wing-quantities">' + quantityHtml + '</div></div>' +
-                '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="variantQuantityPrice">' + product.quantities[0].price + ' ₽</div></div>' +
-            '</div>';
+            '</div>' +
+            '<div class="eda-price-row"><span class="eda-price" id="variantQuantityPrice">' + quantity0.price + ' ₽</span></div>';
     }
 
     function chooseVariantQuantityVariant(value) {
         activeVariantIndex = Number(value);
         var product = activeVariantQuantityProduct;
-        document.getElementById("edaImg").src = product.variants[activeVariantIndex].img;
+        var variant = product.variants[activeVariantIndex];
+        document.getElementById("edaImg").src = variant.img;
+        document.getElementById("vqDesc").innerText = variant.desc || product.desc || "";
+        updateCustomDropdown('stripVariant', product.variants, activeVariantIndex);
     }
 
     function chooseVariantQuantityAmount(value) {
         activeQuantityIndex = Number(value);
-        var price = activeVariantQuantityProduct.quantities[activeQuantityIndex].price;
-        document.getElementById("variantQuantityPrice").innerText = price + " ₽";
+        var quantity = activeVariantQuantityProduct.quantities[activeQuantityIndex];
+        document.getElementById("variantQuantityPrice").innerText = quantity.price + " ₽";
+        document.getElementById("vqWeight").innerText = quantity.weight || "";
+        document.getElementById("vqKbzhu").innerText = quantity.kbzhu || "";
         var buttons = document.querySelectorAll(".wing-quantities .wing-quantity");
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.toggle("active", i == activeQuantityIndex);
         }
     }
+
 
     var activeSauceProduct = null;
 
@@ -2707,8 +3222,7 @@
 
         document.getElementById("edaImg").src = product.options[0].img;
         document.getElementById("edaInfo").innerHTML =
-            '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;">Соусы</div>' +
-            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;">Соус в ассортименте</h2>' +
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">Соус в ассортименте</h2>' +
             '<div class="wing-options">' +
                 '<div><span class="wing-option-label">Выберите соус</span><div class="sauce-options">' + optionsHtml + '</div></div>' +
                 '<div><span class="wing-option-label">Цена</span><div class="wing-current-price" id="sauceCurrentPrice">40 ₽</div></div>' +
