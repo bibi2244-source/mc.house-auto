@@ -57,6 +57,7 @@
         }
 
         .logo {
+            cursor: pointer;
             font-family: 'Barlow Condensed', sans-serif;
             font-weight: 900;
             font-size: 30px;
@@ -1002,6 +1003,10 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
+        .order-step-whatsapp {
+                cursor: pointer;
+        }
+
         .order-step:hover {
             transform: scale(1.04);
             box-shadow: 0 8px 20px rgba(0,0,0,0.16);
@@ -1279,6 +1284,7 @@
         .modal-overlay.open { display: flex; }
 
         .modal-box {
+            border-radius: 18px;
             background: var(--gray);
             border: 1px solid var(--border);
             padding: 48px;
@@ -1824,13 +1830,13 @@
 
 <!-- ШАПКА -->
 <header>
-    <div class="logo">MC<span>.</span>HOUSE AUTO</div>
+    <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">MC<span>.</span>HOUSE AUTO</div>
     <nav class="menu">
-        <a href="#top">Главная</a>
+        <a href="#top" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });">Главная</a>
         <a href="#catalog" onclick="otkrytVseMenu(event)">Меню</a>
         <a href="#about" onclick="otkrytModal(); return false;">О нас</a>
-        <span>Адрес</span>
-        <span>Контакты</span>
+        <a href="#footer" onclick="event.preventDefault(); document.getElementById('footer').scrollIntoView({ behavior: 'smooth', block: 'start' });">Адрес</a>
+        <a href="#footer" onclick="event.preventDefault(); document.getElementById('footer').scrollIntoView({ behavior: 'smooth', block: 'start' });">Контакты</a>
         <a href="https://wa.me/79850749101" class="order-btn" target="_blank" rel="noopener noreferrer">Заказать</a>
     </nav>
     <div class="header-right">
@@ -1974,7 +1980,7 @@
 
 
         <!-- ШАГ 2 -->
-        <div class="order-step">
+        <div class="order-step order-step-whatsapp" onclick="window.open('https://wa.me/79850749101', '_blank')">
 
             <div class="order-step-number">2</div>
 
@@ -2067,7 +2073,7 @@
 </section>
 
 <!-- ПОДВАЛ -->
-<footer>
+<footer id="footer">
 
     <div class="footer-info">
 
@@ -2120,7 +2126,7 @@
             </div>
             <div class="about-detail">
                 <span class="about-detail-label">Часы работы</span>
-                <span>11:00 — 23:30</span>
+                <span>12:00 - 00:00 сб-чт<br>13:30 - 00:00 пт</span>
             </div>
             <div class="about-detail">
                 <span class="about-detail-label">Адрес</span>
@@ -2130,17 +2136,14 @@
                 <span class="about-detail-label">Телефон</span>
                 <div class="copy-line">
                     <button class="about-phone" type="button" onclick="copyPhone(event)">+7 985 074-91-01</button>
+                    <a class="about-whatsapp" href="https://wa.me/79850749101" target="_blank" rel="noopener noreferrer">(Написать в WhatsApp)</a>
                     <span class="copy-feedback" id="phoneCopyFeedback" aria-live="polite"></span>
                 </div>
             </div>
             <div class="about-detail">
-                <span class="about-detail-label">WhatsApp</span>
-                <a class="about-whatsapp" href="https://wa.me/79850749101" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
-            </div>
-            <div class="about-detail">
                 <span class="about-detail-label">Электронная почта</span>
                 <div class="copy-line">
-                    <button class="about-email" type="button" onclick="copyEmail(event)">mchousepetropavlovskaya@gmail.com</button>
+                    <button class="about-email" type="button" onclick="copyEmail(event)">mchouse.auto@gmail.com</button>
                     <span class="copy-feedback" id="copyFeedback" aria-live="polite"></span>
                 </div>
             </div>
@@ -2189,9 +2192,9 @@
             weight: "329 г",
             kbzhu: "921 ккал / Б 47.7 / Ж 51.2 / У 68.3",
             options: [
-            { name: "оригинальный", price: 189, img: "images/криспи.png",
+            { name: "Оригинальный", price: 189, img: "images/криспи.png",
                 desc: "Сочное куриное филе в золотистой панировке с пекинской капустой и нежным майонезом на мягкой булочке без кунжута — чистый вкус и хруст для тех, кто ценит простые идеальные сочетания." },
-            { name: "острый", price: 189, img: "images/криспи острый.png",
+            { name: "Острый", price: 189, img: "images/криспи острый.png",
                 desc: "Острое куриное филе в хрустящей панировке с пекинской капустой и майонезом на мягкой булочке без кунжута — просто, хрустко и с риском привыкания." }
         ] },
         { id: 8, title: "чикен барбекю", cat: "burgery", price: 189,
@@ -2219,26 +2222,26 @@
         { id: 21, title: "пицца ассорти", cat: "pitstsa", type: "option-group", price: 297, img: "images/ассорти.png",
             desc: "Тонкое тесто с куриными байтсами, говяжьим фаршем, помидорами, грибами и маслинами под моцареллой и томатным соусом — для тех, кто хочет попробовать всё и сразу.",
             options: [
-                { name: "мини", price: 297, weight: "450 г", kbzhu: "978 ккал / Б 43.9 / Ж 38.9 / У 111.9" },
-                { name: "стандарт", price: 497, weight: "665 г", kbzhu: "1381 ккал / Б 72.7 / Ж 58.1 / У 141.7" }
+                { name: "Маленькая", price: 297, weight: "450 г", kbzhu: "978 ккал / Б 43.9 / Ж 38.9 / У 111.9" },
+                { name: "Средняя", price: 497, weight: "665 г", kbzhu: "1381 ккал / Б 72.7 / Ж 58.1 / У 141.7" }
             ] },
         { id: 22, title: "пицца куриная", cat: "pitstsa", type: "option-group", price: 297, img: "images/куриная.png",
             desc: "Сытная пицца на тонком тесте с куриными байтсами, моцареллой и помидорами под томатным соусом — для тех, кто хочет вкусно и основательно подкрепиться.",
             options: [
-                { name: "мини", price: 297, weight: "425 г", kbzhu: "829 ккал / Б 48.8 / Ж 30.1 / У 93.8" },
-                { name: "стандарт", price: 497, weight: "640 г", kbzhu: "1249 ккал / Б 73.5 / Ж 45.3 / У 141.3" }
+                { name: "Маленькая", price: 297, weight: "425 г", kbzhu: "829 ккал / Б 48.8 / Ж 30.1 / У 93.8" },
+                { name: "Средняя", price: 497, weight: "640 г", kbzhu: "1249 ккал / Б 73.5 / Ж 45.3 / У 141.3" }
             ] },
         { id: 23, title: "пицца мясная", cat: "pitstsa", type: "option-group", price: 297, img: "images/мясная.png",
             desc: "Сытная пицца на тонком тесте с говяжьим фаршем, моцареллой и помидорами под томатным соусом — праздник для тех, кто любит мясо и не признаёт полумер.",
             options: [
-                { name: "мини", price: 297, weight: "425 г", kbzhu: "854 ккал / Б 42.1 / Ж 39.1 / У 91.5" },
-                { name: "стандарт", price: 497, weight: "640 г", kbzhu: "1313 ккал / Б 66.9 / Ж 62.2 / У 132.3" }
+                { name: "Маленькая", price: 297, weight: "425 г", kbzhu: "854 ккал / Б 42.1 / Ж 39.1 / У 91.5" },
+                { name: "Средняя", price: 497, weight: "640 г", kbzhu: "1313 ккал / Б 66.9 / Ж 62.2 / У 132.3" }
             ] },
         { id: 24, title: "пицца грибная", cat: "pitstsa", type: "option-group", price: 297, img: "images/грибная.png",
             desc: "Тонкое тесто с шампиньонами и моцареллой под томатным соусом — благородная простота для любителей грибов.",
             options: [
-                { name: "мини", price: 297, weight: "395 г", kbzhu: "835 ккал / Б 39.8 / Ж 25.2 / У 116.3" },
-                { name: "стандарт", price: 497, weight: "610 г", kbzhu: "1129 ккал / Б 54.1 / Ж 46.1 / У 123.4" }
+                { name: "Маленькая", price: 297, weight: "395 г", kbzhu: "835 ккал / Б 39.8 / Ж 25.2 / У 116.3" },
+                { name: "Средняя", price: 497, weight: "610 г", kbzhu: "1129 ккал / Б 54.1 / Ж 46.1 / У 123.4" }
             ] },
         { id: 25, title: "пицца пепперони", cat: "pitstsa", price: 497, img: "images/пепперони.png",
             weight: "610 г",
@@ -2264,18 +2267,18 @@
             weight: "444 г",
             kbzhu: "913 ккал / Б 58.7 / Ж 38.8 / У 75.6",
             options: [
-            { name: "оригинальный", price: 249, img: "images/биг мастер.png",
+            { name: "Оригинальный", price: 249, img: "images/биг мастер.png",
                 desc: "Сочное куриное филе в панировке с хешбрауном, сыром Чеддер, помидорами и пекинской капустой под майонезом в тонком лаваше — большой и сытный ролл для тех, кто выбирает максимум удовольствия." },
-            { name: "острый", price: 249, img: "images/биг мастер острый.png",
+            { name: "Острый", price: 249, img: "images/биг мастер острый.png",
                 desc: "Сочное куриное филе в острой панировке с хешбрауном, сыром Чеддер, помидорами и пекинской капустой под майонезом в тонком лаваше — большой и сытный ролл с огоньком для тех, кто не боится экспериментировать." }
         ] },
         { id: 35, title: "лестер", cat: "rolly", type: "option-group", price: 179, img: "images/лестер.png",
             weight: "278 г",
             kbzhu: "760 ккал / Б 30 / Ж 38 / У 68",
             options: [
-            { name: "оригинальный", price: 179, img: "images/лестер.png",
+            { name: "Оригинальный", price: 179, img: "images/лестер.png",
                 desc: "Золотистые куриные стрипсы в хрустящей панировке с помидорами и пекинской капустой под нежным майонезом в тонком лаваше — сытный перекус без лишних церемоний." },
-            { name: "острый", price: 179, img: "images/лестер острый.png",
+            { name: "Острый", price: 179, img: "images/лестер острый.png",
                 desc: "Хрустящие куриные стрипсы в острой панировке с помидорами и пекинской капустой под нежным майонезом в тонком лаваше — привычный сытный ролл, но с характером." }
         ] },
         { id: 37, title: "шримп ролл", cat: "rolly", price: 239, img: "images/шримп ролл.png",
@@ -2289,18 +2292,18 @@
         { id: 48, title: "картофель фри", cat: "kartoshka", type: "option-group", price: 149, img: "images/фри стандарт.png",
             desc: "Золотистый хрустящий картофель фри с фирменной приправой — идеальный гарнир или самостоятельная закуска для тех, кто ценит проверенную классику.",
             options: [
-            { name: "стандарт", price: 149, img: "images/фри стандарт.png", weight: "140 г", kbzhu: "431 ккал / Б 5.2 / Ж 20.7 / У 56.6" },
-            { name: "большая", price: 189, img: "images/фри большая.png", weight: "230 г", kbzhu: "711 ккал / Б 8.7 / Ж 34.2 / У 93.5" }
+            { name: "Стандартная", price: 149, img: "images/фри стандарт.png", weight: "140 г", kbzhu: "431 ккал / Б 5.2 / Ж 20.7 / У 56.6" },
+            { name: "Большая", price: 189, img: "images/фри большая.png", weight: "230 г", kbzhu: "711 ккал / Б 8.7 / Ж 34.2 / У 93.5" }
         ] },
         { id: 49, title: "картофель по-деревенски", cat: "kartoshka", type: "option-group", price: 159, img: "images/по-деревенски стандарт.png",
             desc: "Хрустящие снаружи и мягкие внутри дольки картофеля с пряными специями — идеальный гарнир или закуска для ценителей деревенского вкуса.",
             options: [
-            { name: "стандарт", price: 159, img: "images/по-деревенски стандарт.png", weight: "225 г", kbzhu: "338 ккал / Б 5.6 / Ж 12.4 / У 51.8" },
-            { name: "большая", price: 219, img: "images/по-деревенски большая.png", weight: "290 г", kbzhu: "436 ккал / Б 7.2 / Ж 16.0 / У 66.8" }
+            { name: "Стандартная", price: 159, img: "images/по-деревенски стандарт.png", weight: "225 г", kbzhu: "338 ккал / Б 5.6 / Ж 12.4 / У 51.8" },
+            { name: "Большая", price: 219, img: "images/по-деревенски большая.png", weight: "290 г", kbzhu: "436 ккал / Б 7.2 / Ж 16.0 / У 66.8" }
         ] },
         { id: 39, title: "стрипсы", cat: "stripsy", type: "variant-quantity-group", price: 147, img: "images/стрипсы.png", variants: [
-            { name: "оригинальные", img: "images/стрипсы.png", desc: "Хрустящие куриные стрипсы — идеальный перекус для любителей хруста." },
-            { name: "острые", img: "images/стрипсы острые.png", desc: "Острые хрустящие куриные стрипсы — перекус с огоньком." }
+            { name: "Оригинальные", img: "images/стрипсы.png", desc: "Хрустящие куриные стрипсы — идеальный перекус для любителей хруста." },
+            { name: "Острые", img: "images/стрипсы острые.png", desc: "Острые хрустящие куриные стрипсы — перекус с огоньком." }
         ], quantities: [
             { name: "2 шт", price: 147, weight: "142 г", kbzhu: "399 ккал / Б 22.7 / Ж 19.3 / У 33.5" },
             { name: "5 шт", price: 277, weight: "355 г", kbzhu: "998 ккал / Б 56.8 / Ж 48.3 / У 83.8" },
@@ -2313,17 +2316,34 @@
             { name: "9 шт", price: 227, weight: "190 г", kbzhu: "436 ккал / Б 26.5 / Ж 26.5 / У 24.7" },
             { name: "16 шт", price: 327, weight: "335 г", kbzhu: "774 ккал / Б 47.0 / Ж 47.0 / У 43.8" }
         ] },
-        { id: 44, title: "байтсы", cat: "baytsy", type: "option-group", price: 299, img: "images/байтсы классические.png", options: [
-            { name: "классические", price: 299, img: "images/байтсы классические.png",
-                desc: "Хрустящие куриные байтсы — идеальный перекус для любителей хруста.",
-                weight: "315 г", kbzhu: "886 ккал / Б 50.4 / Ж 42.9 / У 74.4" },
-            { name: "в кисло-сладком соусе", price: 327, img: "images/байтсы в кисло-сладком соусе.png",
-                desc: "Хрустящие куриные байтсы в кисло-сладком соусе — перекус с ярким вкусом.",
-                weight: "355 г", kbzhu: "947 ккал / Б 41.9 / Ж 33.9 / У 120" },
-            { name: "в остром соусе", price: 327, img: "images/байтсы в остром соусе.png",
-                desc: "Хрустящие куриные байтсы в остром соусе — перекус с огоньком.",
-                weight: "355 г", kbzhu: "940 ккал / Б 50.6 / Ж 43.1 / У 78.0" }
-        ] },
+        { id: 44, title: "байтсы", cat: "baytsy", price: 299,
+            img: "images/байтсы классические.png",
+            desc: "Хрустящие куриные байтсы — идеальный перекус для любителей хруста.",
+            weight: "315 г",
+            kbzhu: "886 ккал / Б 50.4 / Ж 42.9 / У 74.4"
+        },
+
+        { id: 45, title: "байтсы в соусе", cat: "baytsy", type: "option-group", price: 327,
+            img: "images/байтсы в кисло-сладком соусе.png",
+            options: [
+                {
+                    name: "Кисло-сладкий соус",
+                    price: 327,
+                    img: "images/байтсы в кисло-сладком соусе.png",
+                    desc: "Хрустящие куриные байтсы в кисло-сладком соусе — перекус с ярким вкусом.",
+                    weight: "355 г",
+                    kbzhu: "947 ккал / Б 41.9 / Ж 33.9 / У 120"
+                },
+                {
+                    name: "Острый соус",
+                    price: 327,
+                    img: "images/байтсы в остром соусе.png",
+                    desc: "Хрустящие куриные байтсы в остром соусе — перекус с огоньком.",
+                    weight: "355 г",
+                    kbzhu: "940 ккал / Б 50.6 / Ж 43.1 / У 78.0"
+                }
+            ]
+        },
         { id: 55, title: "креветки", cat: "zakuski", type: "variant-quantity-group", price: 299, img: "images/креветки.png", variants: [
             { name: "классические", img: "images/креветки.png", desc: "Хрустящие креветки в золотистой панировке с нежным мясом внутри — идеальная закуска для любителей морепродуктов." }
         ], quantities: [
@@ -2334,16 +2354,35 @@
         ], quantities: [
             { name: "6 шт", price: 229, weight: "162 г", kbzhu: "486 ккал / Б 21.1 / Ж 29.2 / У 35.6" }
         ] },
-        { id: 60, title: "Добрый кола", cat: "napitki", type: "option-group", price: 100, img: "images/напитки/Добрый кола 0.4.png", options: [
-            { name: "0.4 л", price: 100, img: "images/напитки/Добрый кола 0.4.png" },
-            { name: "0.5 л", price: 139, img: "images/напитки/Добрый кола 0.5.png" }
+        { id: 60, title: "Добрый Кола", cat: "napitki", type: "drink-group", price: 120, img: "images/напитки/Добрый кола 0.4.png",
+            desc: "Классическая кола — освежающий напиток с ярким вкусом.", options: [
+            { name: "0.4", volume: "400 мл", kbzhu: "165 ккал / Б 0 / Ж 0 / У 41", price: 120, img: "images/напитки/Добрый кола 0.4.png" },
+            { name: "0.5", volume: "500 мл", kbzhu: "208 ккал / Б 0 / Ж 0 / У 51.5", price: 130, img: "images/напитки/Добрый кола 0.5.png" }
         ] },
-        { id: 62, title: "Бон Аква 0.5", cat: "napitki", price: 50, img: "images/напитки/Бон Аква 0.5.png" },
-        { id: 63, title: "Рич черный чай персик 0.5", cat: "napitki", price: 100, img: "images/напитки/Рич черный чай персик 0.5.png" },
-        { id: 64, title: "Рич зеленый чай манго 0.5", cat: "napitki", price: 100, img: "images/напитки/Рич зеленый чай манго 0.5.png" },
-        { id: 66, title: "Рич черный чай лимон 0.5", cat: "napitki", price: 100, img: "images/напитки/Рич черный чай лимон 0.5.png" },
-        { id: 67, title: "Добрый кола стекло 0.33", cat: "napitki", price: 120, img: "images/напитки/Добрый кола стекло 0.33.png" },
-        { id: 65, title: "Добрый кола ж/б 0.33", cat: "napitki", price: 100, img: "images/напитки/Добрый кола жб 0.33.png" },
+        { id: 65, title: "Добрый Кола (ж/б)", cat: "napitki", type: "drink-group", price: 120, img: "images/напитки/Добрый кола жб 0.33.png",
+            desc: "Классическая кола в жестяной банке — освежающий вкус.", options: [
+            { name: "0.33", volume: "330 мл", kbzhu: "139 ккал / Б 0 / Ж 0 / У 35.0", price: 120 }
+        ] },
+        { id: 67, title: "Добрый Кола (стекло)", cat: "napitki", type: "drink-group", price: 120, img: "images/напитки/Добрый кола стекло 0.33.png",
+            desc: "Классическая кола в стеклянной бутылке — освежающий вкус.", options: [
+            { name: "0.33", volume: "330 мл", kbzhu: "139 ккал / Б 0 / Ж 0 / У 35.0", price: 120 }
+        ] },
+        { id: 62, title: "Бон Аква", cat: "napitki", type: "drink-group", price: 70, img: "images/напитки/Бон Аква 0.5.png",
+            desc: "Чистая питьевая вода — идеальное утоление жажды.", options: [
+            { name: "0.5", volume: "500 мл", kbzhu: "0 ккал / Б 0 / Ж 0 / У 0", price: 70 }
+        ] },
+        { id: 63, title: "Рич черный чай персик", cat: "napitki", type: "drink-group", price: 130, img: "images/напитки/Рич черный чай персик 0.5.png",
+            desc: "Освежающий черный чай с персиком.", options: [
+            { name: "0.5", volume: "500 мл", kbzhu: "150 ккал / Б 0 / Ж 0 / У 37.5", price: 130 }
+        ] },
+        { id: 66, title: "Рич черный чай лимон", cat: "napitki", type: "drink-group", price: 130, img: "images/напитки/Рич черный чай лимон 0.5.png",
+            desc: "Освежающий черный чай с лимоном.", options: [
+            { name: "0.5", volume: "500 мл", kbzhu: "150 ккал / Б 0 / Ж 0 / У 37.5", price: 130 }
+        ] },
+        { id: 64, title: "Рич зеленый чай манго", cat: "napitki", type: "drink-group", price: 130, img: "images/напитки/Рич зеленый чай манго 0.5.png",
+            desc: "Освежающий зеленый чай с манго.", options: [
+            { name: "0.5", volume: "500 мл", kbzhu: "150 ккал / Б 0 / Ж 0 / У 37.5", price: 130 }
+        ] },
         { id: 70, title: "Сырный соус", cat: "sousy", price: 40, img: "images/Сырный.png",
             weight: "30 г",
             desc: "Нежный сырный соус — идеальное дополнение к любому блюду.",
@@ -2465,7 +2504,6 @@
             subcategories: [
                 { id: "vse", name: "Все" },
                 { id: "holodnye", name: "Холодные напитки" },
-                { id: "soki", name: "Соки" },
                 { id: "voda", name: "Вода" }
             ]
         },
@@ -2730,7 +2768,7 @@
             }
 
             if (title.indexOf("рич") != -1) {
-                return "soki";
+                return "holodnye";
             }
 
             if (title.indexOf("бон аква") != -1) {
@@ -2825,7 +2863,8 @@
             var k = massiv[i];
             var badgeClass = k.badge == "Новинка" ? "badge new" : "badge";
             var badgeHtml = k.badge ? '<div class="' + badgeClass + '">' + k.badge + '</div>' : '';
-            var weightLabelHtml = k.cat == "napitki" ? '' : '<div class="weight">Цена</div>';
+            var weightLabelHtml = '<div class="weight">Цена</div>';
+            var fromPrice = k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" || (k.type == "drink-group" && k.options.length > 1);
             var oldPriceHtml = k.oldPrice ? '<span class="old">' + k.oldPrice + ' ₽</span>' : '';
             var cardActionHtml = '<button class="choice-btn" onclick="otkrytBlyudo(' + k.id + ')">Подробнее</button>';
             var card = document.createElement("div");
@@ -2840,7 +2879,7 @@
                     '<h3>' + k.title + '</h3>' +
                     weightLabelHtml +
                     '<div class="price-row">' +
-                        '<div class="price">' + (k.type == "wing-group" || k.type == "option-group" || k.type == "variant-quantity-group" || k.type == "sauce-group" ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
+                        '<div class="price">' + (fromPrice ? "от " : "") + k.price + ' ₽' + oldPriceHtml + '</div>' +
                         cardActionHtml +
                     '</div>' +
                 '</div>';
@@ -2848,7 +2887,16 @@
         }
     }
 
+    var poziciyaStranicyDoOtkrytiya = 0;
+    
     function otkrytBlyudo(id) {
+
+        poziciyaStranicyDoOtkrytiya = window.scrollY;
+
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + poziciyaStranicyDoOtkrytiya + "px";
+        document.body.style.width = "100%";
+
         var blyudo = null;
         for (var i = 0; i < menu.length; i++) {
             if (menu[i].id == id) {
@@ -2870,6 +2918,12 @@
             return;
         }
 
+        if (blyudo.type == "drink-group") {
+            renderDrinkModal(blyudo);
+            document.getElementById("edaOverlay").classList.add("open");
+            return;
+        }
+
         if (blyudo.type == "variant-quantity-group") {
             renderVariantQuantityModal(blyudo);
             document.getElementById("edaOverlay").classList.add("open");
@@ -2885,7 +2939,7 @@
         var oldPriceHtml = blyudo.oldPrice ? '<span style="font-size:16px;color:var(--muted);text-decoration:line-through;margin-left:10px;">' + blyudo.oldPrice + ' ₽</span>' : '';
         var badgeHtml = blyudo.badge ? '<span style="background:var(--red);color:white;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px;display:inline-block;">' + blyudo.badge + '</span><br>' : '';
         var kbzhuHtml = blyudo.kbzhu ? '<div class="eda-kbzhu">' + blyudo.kbzhu + '</div>' : '<div class="eda-kbzhu"></div>';
-        var weightHtml = blyudo.cat == "napitki" ? '' : '<div class="eda-weight">' + blyudo.weight + '</div>';
+        var weightHtml = '<div class="eda-weight">' + blyudo.weight + '</div>';
 
         document.getElementById("edaImg").src = blyudo.img;
         document.getElementById("edaInfo").innerHTML =
@@ -3154,6 +3208,42 @@
         updateCustomDropdown('productOption', activeOptionProduct.options, activeOptionIndex);
     }
 
+    var activeDrinkProduct = null;
+
+    function renderDrinkModal(product) {
+        activeDrinkProduct = product;
+        var option0 = product.options[0];
+        var buttonsHtml = "";
+
+        for (var j = 0; j < product.options.length; j++) {
+            buttonsHtml += '<button class="wing-quantity' + (j == 0 ? ' active' : '') + '" type="button" onclick="chooseDrinkVolume(' + j + ')">' + product.options[j].name + '</button>';
+        }
+
+        document.getElementById("edaImg").src = option0.img || product.img;
+        document.getElementById("edaInfo").innerHTML =
+            '<h2 style="font-family:Barlow Condensed,sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:1px;line-height:1;margin-bottom:8px;color:var(--red);">' + product.title + '</h2>' +
+            '<div class="eda-weight" id="drinkVolume">' + option0.volume + '</div>' +
+            '<div class="eda-desc" id="drinkDesc">' + product.desc + '</div>' +
+            '<div class="eda-kbzhu" id="drinkKbzhu">' + option0.kbzhu + '</div>' +
+            '<div class="eda-variants wing-options">' +
+                '<div><span class="wing-option-label">Объем</span><div class="wing-quantities" id="drinkVolumes">' + buttonsHtml + '</div></div>' +
+            '</div>' +
+            '<div class="eda-price-row"><span class="eda-price" id="drinkPrice">' + option0.price + ' ₽</span></div>';
+    }
+
+    function chooseDrinkVolume(index) {
+        var product = activeDrinkProduct;
+        var option = product.options[index];
+        var buttons = document.querySelectorAll("#drinkVolumes .wing-quantity");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.toggle("active", i == index);
+        }
+        document.getElementById("edaImg").src = option.img || product.img;
+        document.getElementById("drinkVolume").innerText = option.volume;
+        document.getElementById("drinkKbzhu").innerText = option.kbzhu;
+        document.getElementById("drinkPrice").innerText = option.price + " ₽";
+    }
+
     var activeVariantQuantityProduct = null;
     var activeVariantIndex = 0;
     var activeQuantityIndex = 0;
@@ -3249,6 +3339,12 @@
 
     function zakrytEdu() {
         document.getElementById("edaOverlay").classList.remove("open");
+
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+
+        window.scrollTo(0, poziciyaStranicyDoOtkrytiya);
     }
 
     function zakrytEduPoKliku(e) {
